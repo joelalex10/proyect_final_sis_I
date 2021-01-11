@@ -1,0 +1,42 @@
+<div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ESTADO DE PAGOS</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-fixed table-sm border border-dark text-center">
+                        <thead class="table-dark">
+                        <tr>
+                            <th style="width: 160px" scope="col">FECHA PAGO</th>
+                            <th style="width: 80px" scope="col">ESTADO</th>
+                            <th style="width: 120px" scope="col">N. CUOTA</th>
+                            <th style="width: 85px" scope="col">MONTO</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in estado_cuotas %}
+                            <tr>
+                                <td style="width: 160px"  >{{ item.fecha|date:"Y-m-d" }}</td>
+                                {% if item.estado == 'PAGADO' %}
+                                    <td style="width: 80px; color: green" >{{ item.estado }}</td>
+                                {% else %}
+                                    <td style="width: 80px; color: red" >{{ item.estado }}</td>
+
+                                {% endif %}
+                                <td style="width: 120px" >{{ item.n_cuota }}</td>
+                                <td style="width: 85px;" >{{ item.monto }}</td>
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>

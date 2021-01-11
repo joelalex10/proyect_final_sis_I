@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de Pagos</title>
+
+    <link rel="stylesheet" href="{% static 'styles/styleEstadoPagos.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+</head>
+    <body>
+        <div class="modal-dialog-scrollable">
+            <div class="col-sm-24 seccionPrincipal">
+                <div class="modal-content" >
+                    <div class="barra-principal">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-left">
+                                    <h1 class="text-estado-pagos">ESTADO DE PAGOS</h1>
+                                </div>
+                                <div class="col text-right">
+                                    <div class="p text-usuario">
+                                        <label class="p font-weight-bold">Usuario:</label>
+                                        <label class="p">{{ usuario.nombre }}</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contenido-principal">
+                        <div class="row text-monto">
+                            <div class="col-3 ">
+                                CLIENTE
+                            </div>
+                            <div class="col-4 text-left">
+                                <input type="text" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{ datos_cliente_alquiler.nombre }}">
+                            </div>
+                        </div>
+                        <div class="row text-monto">
+                            <div class="col-3">
+                                CI
+                            </div>
+                            <div class="col-4 text-left">
+                                <input type="text" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{ datos_cliente_alquiler.ci }}">
+                            </div>
+                        </div>
+
+                        <div class="row text-monto">
+                            <div class="col-3">
+                                TIEMPO
+                            </div>
+                            <div class="col-4 text-left">
+                                <input type="text" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{ datos_cliente_alquiler.meses }} Meses">
+                            </div>
+                        </div>
+
+                        <div class="row text-monto">
+                            <div class="col-3">
+                                NRO CUOTAS
+                            </div>
+                            <div class="col-4 text-left">
+                                <input type="text" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{ datos_cliente_alquiler.num_cuotas }}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <table class="table table-fixed text-center table-sm border border-dark">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th style="width: 200px" scope="col">FECHA DE PAGO</th>
+                                        <th style="width: 150px" scope="col">ESTADO</th>
+                                        <th style="width: 150px" scope="col">Nro DE CUOTA</th>
+                                        <th style="width: 150px" scope="col">MONTO</th>
+                                        <th style="width: 150px" scope="col">OPCIONES</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in estado_cuotas %}
+                                        <tr>
+                                            <td style="width: 200px" >{{ item.fecha|date:"Y-m-d" }}</td>
+                                            {% if item.estado == 'PAGADO' %}
+                                                <td style="width: 150px; color: green" >{{ item.estado }}</td>
+                                            {% else %}
+                                                    <td style="width: 150px; color: red" >{{ item.estado }}</td>
+                                            {% endif %}
+                                            <td style="width: 150px" >{{ item.n_cuota }}</td>
+                                            <td style="width: 150px" >{{ item.monto }}</td>
+                                            <td style="width: 150px">
+                                                <button type="button" class="btn btn-primary" onclick="pagarCuota('{% url 'pagar_cuotas' %}', {{ item.id }}, '{{ item.estado }}')">
+                                                    <i class="fas fa-sign-in-alt"></i>PAGAR
+                                                </button>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col text-right">
+                                <a href="{% url 'controlAlquileres' usuario.id_usuario %}">
+                                    <button type="button" class="btn btn-primary" id="botonAtras"><i class="fas fa-sign-in-alt"></i>  ATRAS </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script src="{% static 'scripts/scriptEstadoPagos.js' %}"></script>
+
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">PAGAR CUOTA</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

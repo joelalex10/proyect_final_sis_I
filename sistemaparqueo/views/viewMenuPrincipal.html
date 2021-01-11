@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Administrador</title>
+
+    <link rel="stylesheet" href="{% static 'styles/styleMenuPrincipal.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+</head>
+<body>
+
+<div class="modal-dialog-scrollable">
+    <div class="col-sm-24 seccionPrincipal">
+        <div class="modal-content text-center" >
+            <div class="barra-principal">
+                <div class="container-barra">
+                    <h1 >MENU ADMINISTRADOR</h1>
+                    <p class="text-right texto-usuario">Usuario: {{ usuario.nombre }}</p>
+                </div>
+
+                <button class="btn btn-primary" id="boton-cerrar-sesion"><i class="fas fa-sign-in-alt"></i>Cerrar Sesion</button>
+            </div>
+            <div class="contenido-principal">
+                <div class="container">
+                    <div type="" class="grid-container" action="saludo/">
+                        <div class="grid-item ">
+                            <i style="font-size: 60px; color: white" class="far fa-money-bill-alt"></i>
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Reporte de Caja</h3>
+                            <a href="{% url 'reporteCaja'  usuario.id_usuario %}">
+                                <button class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+                            <i style="font-size: 60px; color: white" class="fas fa-calendar-alt"></i>
+                            <i style="font-size: 60px; color: white" class="fas fa-users"></i>
+
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Control de Empleados</h3>
+                            <a href="{% url 'controlEmpleados' usuario.id_usuario %}">
+                                <button type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+
+                            <i style="font-size: 60px; color: white" class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Reporte de Alquileres</h3>
+                            <a href="{% url 'reporteAlquileres' usuario.id_usuario %}">
+                                <button type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+
+                            <i style="font-size: 60px; color: white" class="fas fa-car"></i>
+                            <i style="font-size: 60px; color: white" class="fas fa-search"></i>
+
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Historial de Ubicacion</h3>
+                            <a href="{% url 'historial_ubicacion' usuario.id_usuario %}">
+                                <button type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+                            <i style="font-size: 60px; color: white" class="fas fa-users"></i>
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Gestión de Usuarios</h3>
+                            <a href="{% url 'gestionUsuarios' usuario.id_usuario %}">
+                                <button type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+                            <i style="font-size: 60px; color: white" class="fas fa-table"></i>
+
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Gestion de Tarifas</h3>
+                            <a href="{% url 'gestionTarifas' usuario.id_usuario %}">
+                                <button type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                            </a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+</body>
+</html>

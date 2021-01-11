@@ -1,0 +1,51 @@
+<div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle2">REGISTRAR SALIDA</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                           <div class="col">
+                               FECHA INGRESO: {{ fecha_entrada }}
+                           </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                FECHA SALIDA: {{ fecha_salida }}
+                            </div>
+                        </div>
+                        {% if estado_alquiler %}
+                            <div class="row">
+                                <div class="col">
+                                    EL CLIENTE TIENE UN ALQUILER
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="col">
+                                    Pago: {{ precio }} Bs.
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Descuentos: {{ descuento }} Bs.
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Pago Total: {{ pagar }} Bs.
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                    <button type="button" onclick="registrarSalida('{% url 'registrar_salida' %}','{{ id_registro_parqueo }}','{{ fecha_salida }}', {{id_tarifa}}, {{ id_espacio }}, {{ pagar }} )" class="btn btn-primary">REGISTRAR SALIDA</button>
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,93 @@
+{% load static %}
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">REGISTRAR DESCUENTO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <input name="id_registro" value="{{ id_registro_parqueo }}" class="form-control" type="hidden"/>
+                <div class="row">
+                    <div class="col-4">
+                        MONTO
+                    </div>
+                    <div class="col-8 text-left">
+                        <div class="input-group mb-3">
+                            <input id="descuento-monto" type="number" min="0" class="form-control" placeholder="Ingrese el monto" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">Bs.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 ">
+                        DESCRIPCION
+                    </div>
+                    <div class="col-8" rows="5">
+                        <textarea id="descuento-descripcion" class="form-control" name="descripcion"></textarea>
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <div class="row">
+                    <div class="col text-center ">
+                        <label class="h5">LISTA DE DESCUENTOS</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <table class="table text-center border border-dark">
+                            <thead class="table-dark">
+                            <tr>
+                                <th style="width: 125px" scope="col">MONTO</th>
+                                <th style="width: 240px" scope="col">DESCRIPCION</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if lista_descuentos %}
+                                {% for item in lista_descuentos %}
+                                    <tr>
+                                        <td style="width: 125px" >
+                                            <div class="input-group mb-3">
+                                                <input type="number" readonly min="0" class="form-control" placeholder="{{ item.monto }}" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon2">Bs.</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="width: 240px" >
+                                            <textarea readonly class="form-control" placeholder="{{ item.descripcion }}" name="descripcion"></textarea>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td style="width: 200%" >
+                                        <input type="number" readonly min="0" class="form-control" placeholder="*No hay descuentos registrados" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    </td>
+                                    <td style="width: 200%" >
+                                    </td>
+                                </tr>
+                            {% endif %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button onclick="registrarDescuentos('{% url 'registrar_descuento' %}', {{ id_registro_parqueo }})" type="button"  class="btn botonSeleccionar">REGISTRAR NUEVO DESCUENTO</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+        </div>
+    </div>
+    <script src="{% static 'scripts/scriptSalidaVehiculos.js' %}">
+
+    </script>
+</div>

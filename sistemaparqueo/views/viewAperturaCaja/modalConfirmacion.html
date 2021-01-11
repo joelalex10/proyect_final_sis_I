@@ -1,0 +1,32 @@
+{% load static %}
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">MENSAJE DE CONFIRMACIÓN</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <label>FECHA APERTURA: <label id="fecha_apertura"> </label>
+                    <label id="hora_apertura"></label>
+                </label>
+                <label>USTED ESTA ABRIENDO LA CAJA CON: <label id="monto">
+
+                    <label id="monto_apertura"></label> Bs.
+                </label>
+
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCELAR</button>
+            <button type="button" onclick="registrarApertura('{% url 'registrar_apertura' %}', '{% url 'menuEmpleado' id_usuario %}')" class="btn btn-primary">CONFIRMAR</button>
+        </div>
+    </div>
+
+    <script src="{% static 'scripts/scriptAperturaCaja.js' %}">
+    </script>
+
+</div>

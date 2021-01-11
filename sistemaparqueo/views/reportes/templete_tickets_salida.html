@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div style="width: 600px" class="card-container">
+        <div class="card">
+          <div class="text-center card-header">
+              <h1>
+                  --PARQUEO LIBERTADOR OBRAJES--
+
+              </h1>
+          </div>
+          <div class="card-body">
+              <h5 class="card-title">PLACA: {{ datos_registro.placa }}</h5>
+              <h5 class="card-title">COLOR: {{ datos_registro.color }}</h5>
+
+              <h5 class="card-title">HORA INGRESO: {{ datos_registro.entrada|date:"Y-m-d H:i:s" }}</h5>
+              <h5 class="card-title">HORA SALIDA: {{ datos_registro.salida|date:"Y-m-d H:i:s" }}</h5>
+              <h5 class="card-title">LUGAR: {{ datos_registro.sector }} - {{ datos_registro.posicion }}</h5>
+              {% if isAlquiler  %}
+                  <h5 class="card-title">*EL CLIENTE TIENE UN ALQUILER </h5>
+              {% else %}
+                  <h5 class="card-title">PRECIO: {{ precio }} </h5>
+                  <h5 class="card-title">DESCUENTOS: {{ descuentos }} </h5>
+                  <h5 class="card-title">TOTAL: {{ total }}</h5>
+              {% endif %}
+
+
+          </div>
+        </div>
+    </div>
+</body>
+</html>

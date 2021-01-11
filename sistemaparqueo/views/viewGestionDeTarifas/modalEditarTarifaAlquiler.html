@@ -1,0 +1,58 @@
+{% load static %}
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">MODIFICAR TARIFA ALQUILER</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form id="form_edit_tarifa_alquiler">
+
+            <div class="modal-body">
+                <div class="row margin-row">
+                    <div class="col-4 background-label-modal text-center">
+                        <label class="h6 text-uppercase text-modal-input">MESES
+                        </label>
+                    </div>
+                    <input name="f_id_a_tarifa" value="{{ tarifa_alquiler.id_tarifa_alquiler }}" class="form-control" type="hidden"/>
+                    <div class="col-8">
+                        <div class="input-group">
+
+                            <input name="f_meses_a_tarifa" value="{{ tarifa_alquiler.meses }}" type="number" min="0" placeholder="Ingrese el numero de meses" class="form-control border border-secondary">
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row margin-row">
+                    <div class="col-4 background-label-modal text-center">
+                        <label class="h6 text-uppercase text-modal-input">PRECIO
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+
+                            <input name="f_precio_a_tarifa" value="{{ tarifa_alquiler.precio }}" type="number" min="0" placeholder="Ingrese el precio" class="form-control border border-secondary">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text border border-secondary">Bs.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button"   class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                <button onclick="editarTarifaAlquiler('{% url 'editar_tarifa_alquiler' %}')"  class="btn btn-primary">GUARDAR CAMBIOS</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="{% static 'scripts/scriptGestionDeTarifas.js' %}">
+    </script>
+
+</div>

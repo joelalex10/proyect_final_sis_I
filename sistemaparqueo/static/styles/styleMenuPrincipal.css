@@ -1,0 +1,104 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 100px;
+    margin-right: 100px;
+
+}
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+    margin-bottom: 50px;
+
+}
+.contenido-principal{
+
+}
+.container-barra{
+    overflow: hidden;
+    margin-bottom: -20px;
+}
+.container-barra h1{
+    float: left;
+    margin-top: 10px;
+    color: white;
+}
+.container-barra .texto-usuario{
+    margin-right: 20px;
+    color: white;
+}
+.barra-principal #boton-cerrar-sesion{
+    margin-left: 950px;
+}
+.barra-principal #boton-cerrar-sesion{
+    cursor: pointer;
+    width: 150px;
+    background: darkred;
+    border-color: white;
+
+}
+.barra-principal #boton-cerrar-sesion:hover{
+    background: cadetblue;
+}
+.container{
+    overflow: hidden;
+}
+.grid-container{
+    width: 360px;
+    display: grid;
+    grid-template-columns: auto;
+
+    margin: 20px auto;
+    float: left;
+}
+.grid-container:hover{
+    transform: scale(1.15);
+
+}
+.grid-item{
+    /*background: url("../assets/imagen.jpg");*/
+    background: #1a2537;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px;
+    width: 200px;
+    margin: 0 auto;
+    height: 100px;
+    border-radius: 15px 15px 0 0;
+    margin-top: 30px;
+    box-shadow: -1px 5px 19px 8px rgba(0,0,0,0.9);
+}
+.grid-item2{
+    width: 200px;
+    padding: 20px;
+    background: #FEFEFE;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: -1px 5px 19px 8px rgba(0,0,0,0.9);
+}
+
+.botonIngresar{
+    color: white;
+    background: #004445;
+}
+
+.botonIngresar:hover{
+    background: cadetblue;
+}

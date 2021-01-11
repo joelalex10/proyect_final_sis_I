@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Alquiler</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <link rel="stylesheet" href="{% static 'styles/styleAgregarAlquiler.css' %}">
+</head>
+<body>
+
+    <div class="modal-dialog-scrollable">
+        <div class="col-sm-24 seccionPrincipal">
+            <div class="modal-content text-center" >
+
+                <div class="barra-principal">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col text-left">
+                                <h1 class="text-agregar-alquiler">NUEVO ALQUILER</h1>
+                            </div>
+                            <div class="col text-right">
+                                <div class="p text-usuario">
+                                    <label class="p font-weight-bold">Usuario:</label>
+                                    <label class="p">{{ usuario.nombre }}</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido-principal">
+                    <div class="container">
+                       <form id="formAgregarAlquileres" action="">
+                           <p style="color: green" id="client-result"></p>
+                           <div id="status_r_ci">
+                               <input name="status_ci" value="0" class="form-control" type="hidden"/>
+
+                           </div>
+                           <div id="status_r_vehiculo">
+                               <input name="status_vehiculo" value="0" class="form-control" type="hidden"/>
+
+                           </div>
+
+                           <div id="status_r">
+                               <input name="status_default" value="" class="form-control" type="hidden"/>
+                           </div>
+                           <div class="row margin-row">
+                               <div class="col-4 background-label-text">
+                                   <label class="h6 text-uppercase ">Ci Cliente
+                                   </label>
+                               </div>
+                               <div class="col-8">
+                                   <input name="form_alquiler_ci" onkeydown="buscarCiCliente('{% url 'buscarCiCliente' %}')" id="f_ci" type="text" class="form-control border border-secondary" placeholder="Ingrese el ci del cliente" aria-label="Username" aria-describedby="basic-addon1">
+                               </div>
+                           </div>
+
+                           <div class="row margin-row">
+                               <div class="col-4 background-label-text">
+                                   <label class="h6 text-uppercase">Nombre cliente
+                                   </label>
+                               </div>
+                               <div class="col-8" id="input_Cliente">
+                                   <input name="form_alquiler_nombre"  value="" type="text" class="form-control border border-secondary" placeholder="Ingrese el nombre del cliente" aria-label="Username" aria-describedby="basic-addon1">
+                               </div>
+                           </div>
+
+                           <p style="color: green" id="vehicle-result"></p>
+                           <div class="row margin-row">
+                               <div class="col-4 background-label-text">
+                                   <label class="h6 text-uppercase">Placa
+                                   </label>
+                               </div>
+                               <div class="col-8">
+                                   <input name="form_alquiler_placa" id="f_placa" onkeydown="buscarPlacaVehiculo('{% url 'buscarPlacaVehiculo' %}')" type="text" class="form-control border border-secondary" placeholder="Ingrese la placa del vehiculo" aria-label="Username" aria-describedby="basic-addon1">
+                               </div>
+                           </div>
+                           <div class="row margin-row">
+                               <div class="col-4 background-label-text">
+                                   <label class="h6 text-uppercase">Marca y modelo
+                                   </label>
+                               </div>
+                               <div class="col-8"  id="input_marca_modelo">
+                                   <input name="form_alquiler_marca_modelo" value="" type="text" class="form-control border border-secondary" placeholder="Ingrese la marca y el modelo del vehiculo" aria-label="Username" aria-describedby="basic-addon1">
+                               </div>
+                           </div>
+
+                           <div class="row margin-row">
+                               <div class="col-4 background-label-text">
+                                   <label class="h6 text-uppercase">Color
+                                   </label>
+                               </div>
+                               <div class="col-8" id="input_color">
+                                   <input name="form_alquiler_color" value="" type="text" class="form-control border border-secondary" placeholder="Ingrese el color del vehiculo" aria-label="Username" aria-describedby="basic-addon1">
+                               </div>
+                           </div>
+
+                           <div class="row margin-row">
+                               <div class="col-4 background-label-text">
+                                   <label class="h6 text-uppercase">TIPO DE VEHICULO
+                                   </label>
+                               </div>
+                               <div class="col-8" >
+                                   <select name="form_tipo_vehiculo" id="select_tipo" required class="custom-select mr-sm-2 border border-secondary" id="inlineFormCustomSelect">
+                                       <option value="" selected >--SELECCIONE UN TIPO DE VEHICULO--</option>
+                                       {% for item in tipo_vehiculos %}
+                                           <option value="{{ item.id }}">{{ item.tipo }}</option>
+                                       {% endfor %}
+                                   </select>
+                               </div>
+                           </div>
+
+                           <div class="row margin-row">
+                               <div class="col-4 background-label-text">
+                                   <label class="h6 text-uppercase">TIEMPO
+                                   </label>
+                               </div>
+                               <div class="col-8" id="select_tarifa_alquiler">
+                                   <select name="form_tarifa" required class="custom-select mr-sm-2 border border-secondary" id="inlineFormCustomSelect">
+                                       <option value="" selected >--SELECCIONE UNA TARIFA--</option>
+                                       {% for item in lista_tarifa_alquiler %}
+                                           <option value="{{ item.id }}">{{ item.meses }} MESES - {{ item.precio }} Bs.</option>
+                                       {% endfor %}
+                                   </select>
+                               </div>
+
+                           </div>
+
+                           <div class="row margin-row">
+                               <div class="col-4 background-label-text">
+                                   <label class="h6 text-uppercase"># DE CUOTAS
+                                   </label>
+                               </div>
+                               <div class="col-8">
+                                   <input name="form_numero_cuotas" type="number" min="1" class="form-control border border-secondary" placeholder="Seleccione el numero de cuotas" aria-label="Username" aria-describedby="basic-addon1">
+                               </div>
+                           </div>
+
+                           <div class="row">
+                               <div class="col">
+                               </div>
+                               <div class="col">
+                                   <button onclick="agregarNuevoAlquiler('{% url 'agregarAlquiler' %}','{% url 'menuEmpleado' usuario.id_usuario %}')" class="btn btn-primary" id="botonRegistrar"><i class="fas fa-sign-in-alt"></i>REGISTRAR</button>
+                               </div>
+
+                               <div class="col">
+                                   <button type="reset" class="btn btn-primary " id="botonLimpiar"><i class="fas fa-sign-in-alt"></i>LIMPIAR</button>
+                               </div>
+                               <div class="col">
+                               </div>
+                           </div>
+                       </form>
+
+                        <div class="row">
+                            <div class="col text-right">
+                                <a href="{% url 'controlAlquileres' usuario.id_usuario %}">
+                                    <button type="button" class="btn btn-primary" id="botonAtras"><i class="fas fa-sign-in-alt"></i>  ATRAS </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="{% static 'scripts/scriptAgregarAlquiler.js' %}">
+    </script>
+
+</body>
+</html>

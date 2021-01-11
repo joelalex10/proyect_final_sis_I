@@ -1,0 +1,88 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 5%;
+
+}
+
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+
+}
+
+#botonCerrarSesion{
+    margin-top: -2%;
+    background: darkred;
+    border-color: white;
+
+}
+#botonCerrarSesion:hover{
+    background: cadetblue;
+}
+.text-agregar-alquiler{
+    margin-top: 20px;
+    color: white;
+}
+.text-usuario{
+    color: white;
+}
+.contenido-principal{
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+
+}
+.background-label-text{
+    background: darkslategrey;
+    color: white;
+    border-radius: 1px 1px 1px 1px;
+}
+.margin-row{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#botonRegistrar{
+    width: 90%;
+    background: #1a2537;
+    border-color: white;
+
+}
+#botonRegistrar:hover{
+    background: cadetblue;
+}
+#botonLimpiar{
+    width: 90%;
+    background: #1a2537;
+    border-color: white;
+
+}
+#botonLimpiar:hover{
+    background: cadetblue;
+}
+#botonAtras{
+    margin-top: 20px;
+    background: darkred;
+}
+#botonAtras:hover{
+    background: cadetblue;
+}

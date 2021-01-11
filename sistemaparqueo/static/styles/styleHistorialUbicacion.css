@@ -1,0 +1,147 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 5%;
+
+}
+
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+
+}
+
+#botonCerrarSesion{
+    margin-top: -2%;
+    background: darkred;
+    border-color: white;
+
+}
+#botonCerrarSesion:hover{
+    background: cadetblue;
+}
+
+.contenido-principal{
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+.text-historial-ubicacion{
+    color: white;
+    margin-top: 20px;
+}
+.text-usuario{
+    color: white;
+}
+.margin-icon{
+    margin-right: 5px;
+}
+.table-fixed tbody{
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td,
+.table-fixed th{
+    display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead >tr > th{
+    float: left;
+    border-bottom-width: 0;
+}
+.table-container{
+    border: black;
+    text-align: center;
+}
+.table-title{
+    background: #1a2537;
+}
+.botonIncidentes{
+    margin-top: -2%;
+    background: orangered;
+    border-color: white;
+    color: white;
+
+}
+.botonIncidentes:hover{
+    background: cadetblue;
+}
+.botonSeleccionar{
+    background: #021c1e;
+    border-color: white;
+    color: white;
+
+}
+.botonSeleccionar:hover{
+    background: cadetblue;
+
+}
+#botonAtras{
+    margin-top: 2%;
+    background: darkred;
+    border-color: white;
+    color: white;
+
+}
+#botonAtras:hover{
+    background: cadetblue;
+
+}
+.margin-boton-seleccionar{
+    margin-right: 5px;
+}
+.botonIncidente{
+    background: #004445;
+    color: white;
+}
+.botonIncidente:hover{
+    background: cadetblue;
+    color: white;
+}
+.botonDescuentos{
+    background: darkslategrey;
+    color: white;
+}
+.botonDescuentos:hover{
+    background: cadetblue;
+    color: white;
+}
+.text-monto{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.margin-text{
+    margin-top: 7px;
+}
+#botonBuscar{
+    background: #1a2537;
+    color: white;
+}
+#botonBuscar:hover{
+    background: cadetblue;
+    color: white;
+}

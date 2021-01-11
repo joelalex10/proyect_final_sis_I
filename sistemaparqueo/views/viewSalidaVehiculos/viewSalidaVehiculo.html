@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salida de Vehiculo</title>
+
+    <link rel="stylesheet" href="{% static 'styles/styleSalidaVehiculo.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+
+</head>
+<body>
+
+    <div class="modal-dialog-scrollable">
+        <div class="col-sm-24 seccionPrincipal">
+            <div class="modal-content text-center" >
+
+                <div class="barra-principal">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col text-left">
+                                <h1 class="text-apertura-caja">SALIDA DE VEHICULO</h1>
+                            </div>
+                            <div class="col text-right">
+                                <div class="p text-usuario">
+                                    <label class="p font-weight-bold">Usuario:</label>
+                                    <label class="p">{{ usuario.nombre }}</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido-principal">
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label class="col-sm-3 col-form-label h5">Placa</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <input id="input-placa-filtro" type="text" class="form-control " id="staticEmail" placeholder="Buscar por placa">
+
+                                    </div>
+
+                                    <div class="col-3">
+                                        <button type="button" onclick="buscaralidaPorFiltro('{% url 'buscar_salida_filtros' %}')" class="btn botonBuscar mb-2"><i class="fas fa-sign-in-alt icon-asignar-lugar"></i>BUSCAR</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <table id="table-salida-vehiculos" class="table table-fixed table-sm border border-dark">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th style="width: 125px" scope="col">PLACA</th>
+
+                                        <th style="width: 125px" scope="col">LUGAR</th>
+                                        <th style="width: 200px" scope="col">FECHA INGRESO</th>
+                                        <th style="width: 125px" scope="col">TIPO</th>
+                                        <th style="width: 175px" scope="col">DESCUENTO</th>
+                                        <th style="width: 175px" scope="col">INCIDENTES</th>
+                                        <th style="width: 175px" scope="col">SALIDA</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in registro_entradas %}
+                                        <tr>
+                                            <td style="width: 125px" >{{ item.placa }}</td>
+                                            <td style="width: 125px" >{{ item.sector }} - {{ item.posicion }}</td>
+                                            <td style="width: 200px" >{{ item.entrada|date:"Y-m-d H:i:s" }}</td>
+                                            <td style="width: 125px" >{{ item.tipo }}</td>
+                                            <td style="width: 175px" >
+                                                <button type="button" onclick="abrirModalDescuentos('{% url 'agregar_descuento' item.id %}', '{% url 'verificar_alquiler' %}',{{ item.id }})" class="btn botonSeleccionar">
+                                                    <i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>AGREGAR
+                                                </button>
+                                            </td>
+                                            <td style="width: 175px" >
+
+                                                <button type="button" onclick="abrirModalIncidentes('{% url 'agregar_incidente' item.id %}')" class="btn botonIncidente">
+                                                    <i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>REGISTRAR
+                                                </button>
+                                            </td>
+                                            <td style="width: 175px" >
+                                                <button type="button" onclick="abrirModalRegistrarSalida('{% url 'mostrar_registrar_salida' item.id %}')" class="btn botonSalida">
+                                                    <i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>REGISTRAR
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col text-right">
+                                <a href="{% url 'menuEmpleado' usuario.id_usuario %}">
+                                    <button type="button" class="btn btn-primary" id="botonAtras"><i class="fas fa-sign-in-alt"></i>  ATRAS </button>
+                                </a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalDescuentos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    </div>
+
+
+    <div class="modal fade" id="modalIncidente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    </div>
+
+    <div class="modal fade" id="modalSalida" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        var rutaModalDescuentos='/menuEmpleado/SalidaVehiculos/mostrar_agregarDescuento/'
+        var rutaVerificarAlquiler='/menuEmpleado/SalidaVehiculos/verificarEstadoAlquiler/'
+        var rutaModalIncidentes='/menuEmpleado/SalidaVehiculos/mostrar_agregarIncidente/'
+        var rutaModalSalida='/menuEmpleado/SalidaVehiculos/mostrar_registrarSalida/'
+    </script>
+    <script src="{% static 'scripts/scriptSalidaVehiculos.js' %}">
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div style="width: 600px" class="card-container">
+        <div class="card">
+          <div class=" card-header">
+              <h1>
+                  PARQUEO LIBERTADOR OBRAJES
+              </h1>
+              <h5 class="card-title">NIT: {{ datos_factura.nit }} </h5>
+              <h5 class="card-title">DIRECCION: {{ datos_factura.direccion }} </h5>
+
+          </div>
+          <div class="card-body">
+              <h1 class="text-center">FACTURA</h1>
+
+              <h5 class="card-title">Nro FACTURA: {{ datos_factura.nro_factura }}</h5>
+              <h5 class="card-title">Nro AUTORIZACION: {{ datos_factura.autorizacion }}</h5>
+              <h5 class="card-title">CODIGO DE CONTROL: {{ datos_factura.codigo_control }}</h5>
+
+              <h5 class="card-title">FECHA: {{ datos_factura.fecha|date:"Y-m-d H:i:s" }}</h5>
+              <h5 class="card-title">CLIENTE: {{ datos_factura.nombre }}</h5>
+              <h5 class="card-title">NIT CLIENTE: {{ datos_factura.ci }}</h5>
+              <h5 class="card-title">DESCRIPCION: Pago Alquileres</h5>
+              <h5 class="card-title">MONTO: {{ datos_factura.monto_cuota }}</h5>
+
+
+
+
+          </div>
+        </div>
+    </div>
+
+</body>
+</html>

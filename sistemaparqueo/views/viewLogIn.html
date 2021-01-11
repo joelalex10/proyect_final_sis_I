@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesion</title>
+
+    <link rel="stylesheet" href="../static/styles/styleLogIn.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+</head>
+<body>
+
+    <div class="modal-dialog-scrollable">
+        <div class="col-sm-24 seccionPrincipal">
+            <div class="modal-content text-center" >
+
+                <form method="post">
+                {% csrf_token %}
+                    <div class="barra-principal">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-7 text-left">
+                                    <h1 class="text-log-in">INICIO DE SESION</h1>
+                                </div>
+                                <div class="col-5 text-right">
+                                    <select required="" name="user_type" class="custom-select border border-secondary select-usuario" id="inputGroupSelect01">
+                                        <option value="" selected disabled>--SELECCIONE UN USUARIO--</option>
+                                    {%  for tipo_usuario in tipo_usuarios %}
+                                        <option value="{{ tipo_usuario.id_tipo_usuario }}">{{ tipo_usuario.tipo }}</option>
+                                    {% endfor %}
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contenido-principal">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center" id="fotoparqueo">
+                                    <img src="../static/assets/logoParqueo.png"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col input-log-in">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend ">
+                                        <span class="input-group-text  border border-dark">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        </div>
+                                        <input required type="text" name="user_name" class="form-control border border-dark" placeholder="Ingrese su nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col input-log-in">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend" >
+                                        <span class="input-group-text border border-dark">
+                                            <i class="fas fa-key"></i>
+                                        </span>
+                                        </div>
+                                        <input required type="password" name="password" class="form-control border border-dark" placeholder="Ingrese su contraseña" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col input-log-in">
+                                    <!--onclick="definirValores()" -->
+                                    <button type="submit" class="btn " id="botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script type="text/javascript" src="../static/scripts/scriptLogIn.js">
+
+    </script>
+
+</body>
+</html>

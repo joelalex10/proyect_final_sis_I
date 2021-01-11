@@ -1,0 +1,106 @@
+{% load static %}
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">MODIFICAR DATOS DE EMPLEADO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form id="editarCliente" action="">
+            <div class="modal-body text-center">
+
+                <input name="form_id" value="{{ usuario.id_usuario }}" class="form-control" type="hidden"/>
+                <div class="row margin-row ">
+                    <div class="col-4 background-label-text">
+                        <label class="h6 text-uppercase text-modal-input">CI CLIENTE
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input name="forms_ci"  value="{{ usuario.ci }}" type="text" min="0" max="23" placeholder="Ingrese el ci del empleado" class="form-control border border-secondary">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row margin-row">
+                    <div class="col-4 background-label-text">
+                        <label class="h6 text-uppercase text-modal-input">NOMBRE
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input name="forms_nombre"  value="{{ usuario.nombre }}" type="text" min="0" max="23" placeholder="Ingrese el nombre del empleado" class="form-control border border-secondary">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row margin-row">
+                    <div class="col-4 background-label-text">
+                        <label class="h6 text-uppercase text-modal-input">USUARIO
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input name="forms_usuario"  value="{{ usuario.usuario }}" type="text" min="0" max="23" placeholder="Ingrese el nombre de usuario" class="form-control border border-secondary">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row margin-row">
+                    <div class="col-4 background-label-text">
+                        <label class="h6 text-uppercase">CONTRASEÑA
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input name="forms_password" value="{{ usuario.password }}"  required type="password" min="0" placeholder="Ingrese una contraseña" class="form-control border border-secondary">
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-row">
+                    <div class="col-4 background-label-text">
+                        <label class="h6 text-uppercase">CONFIRMAR CONTRASEÑA
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input name="forms_password_confirm" value="{{ usuario.password }}" required type="password" min="0" placeholder="Confirmacion de contraseña" class="form-control border border-secondary">
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-row">
+                    <div class="col-4 background-label-text">
+                        <label class="h6 text-uppercase text-modal-input">HORA INGRESO
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input name="forms_hora_ingreso" value="{{ usuario.obtener_hora_ingreso }}" type="time" class="form-control border border-secondary">
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-row">
+                    <div class="col-4 background-label-text">
+                        <label class="h6 text-uppercase text-modal-input">HORA SALIDA
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input name="forms_hora_salida" value="{{ usuario.obtener_hora_salida }}" type="time" class="form-control border border-secondary">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                <button onclick="editarDatosCliente('{% url 'editar_cliente' %}')"  class="btn btn-primary">GUARDAR CAMBIOS</button>
+            </div>
+        </form>
+
+    </div>
+    <script src="{% static 'scripts/scriptGestionDeEmpleados.js' %}">
+
+    </script>
+</div>
+

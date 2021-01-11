@@ -1,0 +1,128 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 5%;
+
+}
+
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+
+}
+
+#botonCerrarSesion{
+    margin-top: -2%;
+    background: darkred;
+    border-color: white;
+
+}
+#botonCerrarSesion:hover{
+    background: cadetblue;
+}
+
+.contenido-principal{
+    margin-bottom: 20px;
+
+}
+.text-gestion-tarifas{
+    color: white;
+    margin-top: 20px;
+}
+.text-usuario{
+    color: white;
+}
+.contenido-principal{
+    margin-right: 25px;
+    margin-left: 25px;
+}
+.background-label-text{
+    background-color: darkslategrey;
+    color: white;
+}
+.background-label-modal{
+    background-color: darkslategrey;
+    color: white;
+}
+.text-modal-input{
+    margin-top: 7px;
+}
+.margin-row{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.botonAgregar{
+    background-color: #1a2537;
+    width: 100%;
+    border-color: white;
+}
+#botonAgregar:hover{
+    background: cadetblue;
+}
+#botonLimpiar{
+    background: #1a2537;
+    width: 100%;
+    border-color: white;
+
+}
+#botonLimpiar:hover{
+    background: cadetblue;
+}
+.table-fixed1 tbody{
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
+.table-fixed1 thead,
+.table-fixed1 tbody,
+.table-fixed1 td,
+.table-fixed1 th{
+    display: block;
+}
+
+.table-fixed1 tbody td,
+.table-fixed1 thead >tr > th{
+    float: left;
+    border-bottom-width: 0;
+}
+.table-container{
+    border: black;
+    text-align: center;
+}
+.table-title{
+    background: #1a2537;
+}
+#botonAtras{
+    margin-top: 20px;
+    background: darkred;
+}
+#botonAtras:hover{
+    background: cadetblue;
+}
+.botonModificar{
+    background: #021c1e;
+    color: white;
+}
+.botonModificar:hover{
+    background: cadetblue;
+    color: white;
+}

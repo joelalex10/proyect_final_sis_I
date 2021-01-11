@@ -1,0 +1,304 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Tarifas</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+
+    <link rel="stylesheet" href="{% static 'styles/styleGestionDeTarifas.css' %}">
+
+</head>
+<body>
+
+    <div class="modal-dialog-scrollable">
+        <div class="col-sm-24 seccionPrincipal">
+            <div class="modal-content text-center" >
+
+                <div class="barra-principal">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-8 text-left">
+                                <h1 class="text-gestion-tarifas">GESTION DE TARIFAS</h1>
+                            </div>
+                            <div class="col-4 text-right">
+                                <div class="p text-usuario">
+                                    <label class="p font-weight-bold">Usuario:</label>
+                                    <label class="p">{{ usuario.nombre}}</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido-principal">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+
+                                <div class="container">
+
+                                    <form id="agregar_tarifa_registro">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <label class="h5 text-center text-uppercase">
+                                                    Añadir nueva tarifa
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row margin-row">
+                                            <div class="col-4 background-label-text">
+                                                <label class="h6 text-uppercase">HORAS
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="input-group">
+                                                    <input name="f_horas" type="number" required min="0" max="23" placeholder="Ingrese el numero de horas" class="form-control border border-secondary">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row margin-row">
+                                            <div class="col-4 background-label-text">
+                                                <label class="h6 text-uppercase">DIAS
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="input-group">
+
+                                                    <input name="f_dias" type="number" min="0" placeholder="Ingrese el numero de dias" class="form-control border border-secondary">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row margin-row">
+                                            <div class="col-4 background-label-text">
+                                                <label class="h6 text-uppercase">PRECIO
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="input-group">
+
+                                                    <input name="f_precio" type="number" min="0" placeholder="Ingrese el precio" class="form-control border border-secondary">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text border border-secondary">Bs.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                            </div>
+                                            <div class="col">
+                                                <button onclick="agregarTarifaRegistro('{% url 'agregar_tarifa_registro' %}')" class="btn btn-primary " id="botonAgregarTarifaRegistro"><i class="fas fa-sign-in-alt"></i>AGREGAR</button>
+                                            </div>
+                                            <div class="col">
+                                                <button type="reset" class="btn btn-primary " id="botonLimpiar"><i class="fas fa-sign-in-alt"></i>LIMPIAR</button>
+                                            </div>
+                                            <div class="col">
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <div class="container">
+
+                                    <form id="f_tarifa_alquiler">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label class="h5 text-center text-uppercase">
+                                                    Añadir nueva tarifa de alquiler
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row margin-row">
+                                            <div class="col-4 background-label-text">
+                                                <label class="h6 text-uppercase">MESES
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="input-group">
+
+                                                    <input name="f_mes" type="number" required min="0" placeholder="Ingrese el numero de meses" class="form-control border border-secondary">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row margin-row">
+                                            <div class="col-4 background-label-text">
+                                                <label class="h6 text-uppercase">PRECIO
+                                                </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="input-group">
+
+                                                    <input name="f_precio_alquiler" type="number" min="0" placeholder="Ingrese el precio" class="form-control border border-secondary">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text border border-secondary" id="">Bs.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                            </div>
+                                            <div class="col">
+                                                <button onclick="agregarTarifaAlquiler('{% url 'agregar_tarifa_alqiler' %}')" class="btn btn-primary " id="botonAgregarTarifaAlquiler"><i class="fas fa-sign-in-alt"></i>AGREGAR</button>
+                                            </div>
+                                            <div class="col">
+                                                <button type="reset" class="btn btn-primary " id="botonLimpiar"><i class="fas fa-sign-in-alt"></i>LIMPIAR</button>
+                                            </div>
+                                            <div class="col">
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col">
+                                <br>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="h5 text-center text-uppercase">
+                                                Lista de Tarifas
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <table class="table table-fixed1 table-sm border border-dark">
+                                            <thead class="table-dark">
+                                            <tr>
+                                                <th style="width: 100px" scope="col">HORAS</th>
+                                                <th style="width: 100px" scope="col">DIAS</th>
+                                                <th style="width: 150px" scope="col">PRECIO</th>
+                                                <th style="width: 100px" scope="col">OPCIONES</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            {% for item in lista_tarifas_registro %}
+                                                <tr>
+                                                    <td style="width: 100px" >{{ item.horas }}</td>
+                                                    <td style="width: 100px" >{{ item.dias }}</td>
+                                                    <td style="width: 150px" >{{ item.precio }} Bs.</td>
+
+                                                    <td style="width: 100px" >
+                                                        <button onclick="abrirModalTarifaRegistro('{% url 'mostrar_editar_tarifa_registro' item.id %}')" class="btn botonModificar">
+                                                            <i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>MODIFICAR
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <br>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="h5 text-center text-uppercase">
+                                                Lista de Tarifas de Alquileres
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <table class="table table-fixed1 table-sm border border-dark">
+                                            <thead class="table-dark">
+                                            <tr>
+                                                <th style="width: 150px" scope="col">MESES</th>
+                                                <th style="width: 200px" scope="col">PRECIO</th>
+                                                <th style="width: 100px" scope="col">OPCIONES</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in lista_tarifas_alquiler %}
+                                                <tr>
+                                                <td style="width: 150px" >{{ item.meses }}</td>
+                                                <td style="width: 200px" >{{ item.precio }} Bs.</td>
+                                                <td style="width: 100px" >
+
+                                                    <button onclick="abrirModalTarifaAlquiler('{% url 'mostrar_editar_tarifa_alquiler' item.id %}')" class="btn botonModificar">
+                                                        <i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>MODIFICAR
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <a href="{% url 'menuAdmin' usuario.id_usuario %}">
+                                    <button type="button" class="btn btn-primary" id="botonAtras">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                        ATRAS
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalTarifaRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    </div>
+
+    <div class="modal fade" id="modalTarifaAlquiler" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="{% static 'scripts/scriptGestionDeTarifas.js' %}">
+    </script>
+
+</body>
+</html>

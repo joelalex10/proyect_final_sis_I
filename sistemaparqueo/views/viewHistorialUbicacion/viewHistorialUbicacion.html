@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Ubicacion</title>
+
+    <link rel="stylesheet" href="{% static 'styles/styleHistorialUbicacion.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+
+</head>
+<body>
+
+    <div class="modal-dialog-scrollable">
+        <div class="col-sm-24 seccionPrincipal">
+            <div class="modal-content text-center" >
+
+                <div class="barra-principal">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-8 text-left">
+                                <h1 class="text-historial-ubicacion">HISTORIAL DE UBICACION</h1>
+                            </div>
+                            <div class="col-4 text-right">
+                                <div class="p text-usuario">
+                                    <label class="p font-weight-bold">Usuario:</label>
+                                    <label class="p">{{ usuario.nombre }}</label>
+                                </div>
+                                <button type="button" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido-principal">
+                       <div class="row">
+                           <div class="col-5">
+                               <div class="input-group">
+                                   <div class="input-group-prepend ">
+                                        <span class="input-group-text ">
+                                            <i class="fas fa-search margin-icon"></i>
+                                            Buscar por fecha</span>
+                                   </div>
+                                   <input id="fecha-input" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                               </div>
+
+                           </div>
+
+                           <div class="col-5">
+                               <div class="input-group">
+                                   <div class="input-group-prepend ">
+                                        <span class="input-group-text ">
+                                            <i class="fas fa-search margin-icon"></i>
+                                            Buscar por placa</span>
+                                   </div>
+                                   <input id="placa-input" type="text" placeholder="Ingrese el numero de placa" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                               </div>
+
+                           </div>
+
+                           <div class="col">
+                               <button type="submit" onclick="buscarPorFiltros('{% url 'filtros_historial_ubicacion' %}')" class="btn btn-primary " id="botonBuscar"><i class="fas fa-sign-in-alt margin-icon"></i>BUSCAR</button>
+                           </div>
+
+                       </div>
+                       <br>
+                       <div class="row">
+                           <table id="table-historial" class="table table-fixed text-center table-sm border border-dark">
+                               <thead class="table-dark">
+                               <tr>
+                                   <th style="width: 90px" scope="col">PLACA</th>
+                                   <th style="width: 85px" scope="col">SECTOR</th>
+                                   <th style="width: 85px" scope="col">POSICION</th>
+                                   <th style="width: 175px" scope="col">FECHA INGRESO</th>
+                                   <th style="width: 175px" scope="col">FECHA SALIDA</th>
+                                   <th style="width: 130px" scope="col">INCIDENTES</th>
+                                   <th style="width: 130px" scope="col">DESCUENTOS</th>
+                                   <th style="width: 130px" scope="col">VER DETALLES</th>
+
+                               </tr>
+                               </thead>
+                               <tbody>
+                               {% for item in lista_salidas %}
+                               <tr>
+
+                                       <td style="width: 90px"  >{{ item.placa }}</td>
+                                       <td style="width: 85px" >{{ item.sector }}</td>
+                                       <td style="width: 85px" >{{ item.posicion }}</td>
+                                       <td style="width: 175px">{{ item.entrada|date:"Y-m-d H:i:s" }}</td>
+                                       <td style="width: 175px">{{ item.salida|date:"Y-m-d H:i:s" }}</td>
+                                       <td style="width: 130px;" >
+                                           <button type="button" onclick="mostrarModalIncidentes('{% url 'modal_historial_ubicacion' item.id %}')" class="btn botonIncidente">
+                                               <i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>VER
+                                           </button>
+                                       </td>
+                                       <td style="width: 130px;"  >
+                                           <button type="button" onclick="mostrarModalDescuentos('{% url 'modal_historial_descuentos' item.id  %}')" class="btn botonDescuentos">
+                                               <i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>VER
+                                           </button>
+                                       </td>
+                                       <td style="width: 130px" >
+                                           <button type="button" onclick="mostrarModalDetalles('{% url 'modal_historial_detalles' item.id %}')" class="btn botonSeleccionar">
+                                               <i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>SELECCIONAR
+                                           </button>
+                                       </td>
+                               </tr>
+                                {% endfor %}
+                               </tbody>
+                           </table>
+                       </div>
+                       <div class="row">
+                           <div class="col text-right">
+                               <a href="{% url 'menuAdmin' usuario.id_usuario %}">
+                                   <button type="button" class="btn" id="botonAtras"><i class="fas fa-sign-in-alt"></i>  ATRAS </button>
+                               </a>
+                           </div>
+                       </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalIncidentes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    </div>
+
+    <div class="modal fade" id="modalDescuentos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    </div>
+
+
+    <div class="modal fade" id="modalOpciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        var ruta_incidentes = '/menuPrincipal/historialUbicacion/mostrarModalIncidentes/'
+        var ruta_descuentos = '/menuPrincipal/historialUbicacion/mostrarModalDescuentos/'
+        var ruta_detalles = '/menuPrincipal/historialUbicacion/mostrarModalDetalles/'
+
+    </script>
+
+    <script src="{% static 'scripts/scriptHistorialUbicacion.js' %}">
+
+    </script>
+</body>
+</html>

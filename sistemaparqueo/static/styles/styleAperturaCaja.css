@@ -1,0 +1,129 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 225px;
+    margin-right: 225px;
+    margin-bottom: 5%;
+
+}
+
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+
+}
+
+#botonCerrarSesion{
+    margin-top: -15px;
+    background: darkred;
+    border-color: white;
+
+}
+#botonCerrarSesion:hover{
+    background: cadetblue;
+}
+
+.contenido-principal{
+    margin-bottom: 20px;
+
+}
+
+
+.text-monto{
+    margin-bottom: 15px;
+}
+.buttons{
+    margin-top: 15px;
+}
+.card-billetes{
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-top: 25px;
+}
+.card-monedas{
+    margin-top: 25px;
+    margin-left: 10px;
+    margin-right: 30px;
+}
+.text-monedas{
+    background: darkslategrey;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+.text-billetes{
+    background: darkslategrey;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+.efectivo-billetes{
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+.efectivo-monedas{
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-left: 10px;
+}
+.efectivo-total{
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.text-apertura-caja{
+    margin-top: 5%;
+    color: white;
+}
+.text-usuario{
+    color: white;
+}
+
+
+#botonLimpiar{
+    background: #1a2537;
+    width: 80%;
+
+}
+#botonLimpiar:hover{
+    background: cadetblue;
+}
+
+#botonConfirmar{
+    background: #1a2537;
+    width: 80%;
+
+}
+#botonConfirmar:hover{
+    background: cadetblue;
+}
+
+#botonAtras{
+    background: darkred;
+    border-color: white;
+    width: 80%;
+
+    margin-right: 40px;
+
+}
+#botonAtras:hover{
+    background: cadetblue;
+}

@@ -1,0 +1,121 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+.text-apertura-caja{
+    margin-top: 5%;
+    color: white;
+}
+.text-usuario{
+    color: white;
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 5%;
+
+}
+
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+
+}
+
+#botonCerrarSesion{
+    margin-top: -2%;
+    background: darkred;
+    border-color: white;
+
+}
+#botonCerrarSesion:hover{
+    background: cadetblue;
+}
+
+.contenido-principal{
+    margin-bottom: 20px;
+
+}
+.formulario{
+    margin-left: 75px;
+    margin-right: 75px;
+}
+.icon-asignar-lugar{
+    margin-right: 5px;
+}
+.margin-form-ingreso-vehiculo{
+    margin-top: 30px;
+}
+#botonRegistrarEntrada{
+    background: #1a2537;
+    border-color: white;
+}
+#botonRegistrarEntrada:hover{
+    background: cadetblue;
+}
+#botonAsignarLugar{
+
+    background: #1a2537;
+    border-color: white;
+
+}
+
+#botonAsignarLugar:hover{
+    background: cadetblue;
+}
+
+#botonAtras{
+    margin-top: 20px;
+    margin-right: 40px;
+    background: darkred;
+}
+#botonAtras:hover{
+    background: cadetblue;
+}
+.background-label-text{
+    background: darkslategrey;
+    color: white;
+    border-radius: 1px 1px 1px 1px;
+}
+
+.table-fixed tbody{
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td,
+.table-fixed th{
+    display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead >tr > th{
+    float: left;
+    border-bottom-width: 0;
+}
+.botonSeleccionar{
+
+    background: darkslategrey;
+    color: white;
+}
+.botonSeleccionar:hover{
+    background: cadetblue;
+    color: white;
+}

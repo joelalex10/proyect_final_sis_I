@@ -1,0 +1,123 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 5%;
+
+}
+
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+
+}
+
+#botonCerrarSesion{
+    margin-top: -2%;
+    background: darkred;
+    border-color: white;
+
+}
+#botonCerrarSesion:hover{
+    background: cadetblue;
+}
+
+.contenido-principal{
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+.text-gestion-empleados{
+    color: white;
+    margin-top: 20px;
+}
+.text-usuario{
+    color: white;
+}
+.background-label-text{
+    background-color: darkslategrey;
+    color: white;
+}
+.margin-row{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+#botonAgregar{
+    width: 80%;
+    background: #1a2537;
+    border-color: white;
+    color: white;
+
+}
+#botonAgregar:hover{
+    background: cadetblue;
+}
+#botonLimpiar{
+    width: 80%;
+    background: #1a2537;
+    border-color: white;
+    color: white;
+
+}
+#botonLimpiar:hover{
+    background: cadetblue;
+}
+
+
+.botonSeleccionar{
+    width: 100%;
+    background: darkslategrey;
+    border-color: white;
+    color: white;
+
+}
+.botonSeleccionar:hover{
+    background: cadetblue;
+}
+.table-fixed tbody{
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td,
+.table-fixed th{
+    display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead >tr > th{
+    float: left;
+    border-bottom-width: 0;
+}
+.text-modal-input{
+    margin-top: 10px;
+}
+#botonAtras{
+    background: darkred;
+    border-color: white;
+
+}
+#botonAtras:hover{
+    background: cadetblue;
+}

@@ -1,0 +1,257 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">DETALLES</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <label class="text-center">LISTA DE VEHICULOS ENTRANTES EN LOS LADOS DURANTE LA ESTADIA DEL VEHICULO</label>
+            <table class="table text-center border border-dark">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 50%" scope="col">IZQUIERDA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if lista_izquierda %}
+                        {% for item in lista_izquierda %}
+                        <tr>
+                            <td style="width: 100%" >
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">POSICION:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.sector }} - {{ item.posicion }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">PLACA:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.placa }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">ENTRADA:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.entrada|date:"Y-m-d H:i:s" }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">SALIDA:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.salida|date:"Y-m-d H:i:s" }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">COLOR:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.color }}">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>
+                                <label>*NO HAY REGISTROS DE ENTRADAS</label>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+            </table>
+
+            <table class="table text-center border border-dark">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 50%" scope="col">DERECHA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if lista_derecha %}
+                        {% for item in lista_derecha %}
+                            <tr>
+                                <td style="width: 100%" >
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">POSICION:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.sector }} - {{ item.posicion }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">PLACA:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.placa }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">ENTRADA:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.entrada|date:"Y-m-d H:i:s" }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">SALIDA:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.salida|date:"Y-m-d H:i:s" }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">COLOR:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.color }}">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>
+                                <label>*NO HAY REGISTROS DE ENTRADAS</label>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+            </table>
+
+            <label class="text-center">LISTA DE VEHICULOS SALIENTES EN LOS LADOS DURANTE LA ESTADIA DEL VEHICULO</label>
+            <table class="table text-center border border-dark">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 50%" scope="col">IZQUIERDA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if lista_izquierda_salida %}
+                        {% for item in lista_izquierda_salida %}
+                        <tr>
+                            <td style="width: 100%" >
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">POSICION:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.sector }} - {{ item.posicion }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">PLACA:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.placa }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">ENTRADA:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.entrada|date:"Y-m-d H:i:s" }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">SALIDA:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.salida|date:"Y-m-d H:i:s" }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">COLOR:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ item.color }}">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>
+                                <label>*NO HAY REGISTROS DE ENTRADAS</label>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+            </table>
+
+            <table class="table text-center border border-dark">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 50%" scope="col">DERECHA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if lista_derecha_salida %}
+                        {% for item in lista_derecha_salida %}
+                            <tr>
+                                <td style="width: 100%" >
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">POSICION:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.sector }} - {{ item.posicion }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">PLACA:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.placa }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">ENTRADA:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.entrada|date:"Y-m-d H:i:s" }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">SALIDA:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.salida|date:"Y-m-d H:i:s" }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label  class="col-sm-4 col-form-label">COLOR:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" readonly class="form-control-plaintext" value="{{ item.color }}">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>
+                                <label>*NO HAY REGISTROS DE ENTRADAS</label>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+            </table>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+        </div>
+    </div>
+</div>

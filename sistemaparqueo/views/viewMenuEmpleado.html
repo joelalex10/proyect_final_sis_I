@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Empleado</title>
+
+    <link rel="stylesheet" href="{% static 'styles/styleMenuEmpleado.css'%}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+
+</head>
+<body>
+
+<div class="modal-dialog-scrollable">
+    <div class="col-sm-24 seccionPrincipal">
+        <div class="modal-content text-center" >
+
+            <div class="barra-principal">
+
+                <div class="container-barra">
+                    <h1 >MENU EMPLEADO</h1>
+                    <p class="text-right texto-usuario">Usuario: {{ usuario.nombre}}</p>
+                </div>
+
+                <button class="btn btn-primary" id="boton-cerrar-sesion"><i class="fas fa-sign-in-alt"></i>Cerrar Sesion</button>
+            </div>
+            <div class="contenido-principal">
+                <div class="container">
+                    <div type="" class="grid-container" action="saludo/">
+                        <div class="grid-item ">
+
+                            <i style="font-size: 60px; color: white" class="fas fa-car"></i>
+                            <i style="font-size: 60px; color: white" class="fas fa-angle-double-up"></i>
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Ingreso de Vehiculos</h3>
+                            <button onclick="verificarAperturaCaja('{% url 'verificar_apertura_caja' %}', '{% url 'ingresoVehiculos' usuario.id_usuario %}')" type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+
+                            <i style="font-size: 60px; color: white" class="fas fa-car"></i>
+                            <i style="font-size: 60px; color: white" class="fas fa-angle-double-down"></i>
+
+
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Salida de Vehiculos</h3>
+                            <button onclick="verificarAperturaCaja('{% url 'verificar_apertura_caja' %}', '{% url 'salida_de_vehiculos' usuario.id_usuario %}')" type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+                            <i style="font-size: 60px; color: white" class="far fa-money-bill-alt"></i>
+                            <i style="font-size: 60px; color: white" class="fas fa-angle-double-up"></i>
+
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Apertura de Caja</h3>
+                            <button onclick="verificarClausuraCaja('{% url 'verificar_cierre_caja' %}', '{% url 'apertura_caja' usuario.id_usuario %}')" type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+
+                    <div style="margin-left: 175px" class="grid-container">
+                        <div class="grid-item">
+
+                            <i style="font-size: 60px; color: white" class="far fa-money-bill-alt"></i>
+                            <i style="font-size: 60px; color: white" class="fas fa-angle-double-down"></i>
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Cierre de Caja</h3>
+
+                            <button onclick="verificarAperturaCaja('{% url 'verificar_apertura_caja' %}', '{% url 'cierre_caja' usuario.id_usuario %}')" type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+
+
+                            <i style="font-size: 60px; color: white" class="far fa-address-card"></i>
+                            <i style="font-size: 60px; color: white" class="fas fa-car"></i>
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Control de Alquileres</h3>
+                            <button onclick="verificarAperturaCaja('{% url 'verificar_apertura_caja' %}', '{% url 'controlAlquileres' usuario.id_usuario %}')" type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                        </div>
+                    </div>
+
+                    <!--
+                    <div class="grid-container">
+                        <div class="grid-item">
+
+                            <i style="font-size: 60px; color: white" class="fas fa-book"></i>
+                        </div>
+                        <div class="grid-item2">
+                            <h3>Consulta de Espacios</h3>
+                            <a href="https://www.youtube.com/watch?v=PFW2uSCZ0uE">
+                                <button type="submit" class="btn botonIngresar"><i class="fas fa-sign-in-alt"></i>  INGRESAR </button>
+                            </a>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="{% static 'scripts/scriptMenuEmpleado.js' %}"></script>
+
+</body>
+</html>

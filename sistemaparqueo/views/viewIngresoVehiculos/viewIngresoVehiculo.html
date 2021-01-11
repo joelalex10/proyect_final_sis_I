@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Vehiculos</title>
+    <link rel="stylesheet" href="{% static 'styles/styleIngresoVehiculo.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+</head>
+<body>
+    <div class="modal-dialog-scrollable">
+        <div class="col-sm-24 seccionPrincipal">
+            <div class="modal-content text-center" >
+                <div class="barra-principal">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-8 text-left">
+                                <h1 class="text-apertura-caja">INGRESO DE VEHICULOS</h1>
+                            </div>
+                            <div class="col-4 text-right">
+                                <div class="p text-usuario">
+                                    <label class="p font-weight-bold">Usuario:</label>
+                                    <label class="p">{{ usuario.nombre }}</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido-principal">
+                    <div class="formulario">
+                        <form method="get" action="" id="form-registro-entrada">
+                            <div class="container">
+
+                                <input id="status_espacio" value="0" class="form-control" type="hidden"/>
+                                <input id="status_placa" value="0" class="form-control" type="hidden"/>
+                                <input id="status_usuario" value="{{ usuario.id_usuario }}" class="form-control" type="hidden"/>
+                                <input id="id_tipo_espacio" value="0" class="form-control" type="hidden"/>
+
+                                <div class="row margin-form-ingreso-vehiculo">
+                                    <div class="col-3 background-label-text">
+                                        <label class="h6 text-uppercase">Tipo Vehiculo
+                                        </label>
+                                    </div>
+
+                                    <div class="col-9">
+                                        <select class="custom-select border border-secondary" id="select_tipo_vehiculo">
+                                            <option selected value="">--SELECCIONE UN TIPO DE VEHICULO--</option>
+                                            {% for item in tipo_vehiculos %}
+                                                <option value="{{ item.id }}">{{ item.tipo }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row margin-form-ingreso-vehiculo">
+                                    <div class="col-3 background-label-text">
+                                        <label class="h6 text-uppercase ">Lugar
+                                        </label>
+                                    </div>
+
+                                    <div class="col-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="input_espacio" value="*Asigne un lugar*">
+                                    </div>
+                                </div>
+                                <div class="row margin-form-ingreso-vehiculo">
+                                    <div class="col">
+                                        <table class="text-center table table-fixed table-sm border border-dark">
+                                            <thead class="table-dark">
+                                            <tr>
+                                                <th style="width: 140px" scope="col">TIPO ESPACIO</th>
+                                                <th style="width: 100px" scope="col">SECTOR</th>
+                                                <th style="width: 100px" scope="col">POSICIÓN</th>
+                                                <th style="width: 125px" scope="col">ESTADO</th>
+                                                <th style="width: 90px" scope="col">OPCIONES</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in lista_espacios %}
+                                                    <tr>
+                                                        <td style="width: 140px" >{{ item.tipo }}</td>
+                                                        <td style="width: 100px" >{{ item.sector }}</td>
+                                                        <td style="width: 100px" >{{ item.posicion }}</td>
+                                                        <td style="width: 125px" >{{ item.estado }}</td>
+                                                        <td style="width: 90px" >
+                                                            <button type="button" onclick="definirEspacio({{ item.id }}, '{{ item.sector }}','{{ item.posicion }}','{{ item.id_tipo_espacio }}')" class="btn botonSeleccionar"><i class="fas fa-sign-in-alt"></i>  SELECCIONAR </button>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row text-center">
+                                    <div class="col ">
+                                        <input type="text" style="color: green" readonly class="form-control-plaintext" id="status" value="">
+                                    </div>
+                                </div>
+
+                                <div class="row margin-form-ingreso-vehiculo">
+                                    <div class="col-3 background-label-text">
+                                        <label class="h6 text-uppercase ">Placa
+                                        </label>
+                                    </div>
+                                    <div class="col-9">
+                                        <!--onkeydown="buscarCiCliente('')"-->
+                                        <input required id="input-placa" onkeyup="buscarPlaca('{% url 'buscar_placa_vehiculo' %}')"  type="text" class="form-control border border-secondary" placeholder="Ingrese la placa del vehiculo" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+
+                                <div class="row margin-form-ingreso-vehiculo">
+                                    <div class="col-3 background-label-text">
+                                        <label class="h6 text-uppercase ">Color
+                                        </label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input  required id="input-color" type="text" class="form-control border border-secondary" placeholder="Ingrese el color del vehiculo">
+                                    </div>
+                                </div>
+                                <div class="row margin-form-ingreso-vehiculo">
+                                    <div class="col">
+                                        <button type="button" onclick="registrarEntrada('{% url 'registrar_entrada' %}','{% url 'menuEmpleado' usuario.id_usuario %}',rutaImprimirTicket)" id="botonRegistrarEntrada" class="btn btn-primary mb-2"><i class="fas fa-sign-in-alt icon-asignar-lugar"></i>REGISTRAR ENTRADA</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <a href="{% url 'menuEmpleado' usuario.id_usuario %}">
+                                <button type="button" class="btn btn-primary" id="botonAtras"><i class="fas fa-sign-in-alt"></i>  ATRAS </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modalLugares" role="dialog" tabindex="-1"  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var rutaImprimirTicket = '/menuEmpleado/ingresoVehiculos/imprimirTicketEntrada/'
+    </script>
+
+    <script src="{% static 'scripts/scriptIngresoVehiculos.js' %}">
+
+    </script>
+</body>
+</html>

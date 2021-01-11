@@ -1,0 +1,69 @@
+{% load static %}
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">MODIFICAR TARIFA</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form id="form_edit_tarifa" action="">
+
+            <div class="modal-body">
+                <input name="f_id_registro" value="{{ tarifa.id_tarifas }}" class="form-control" type="hidden"/>
+                <div class="row margin-row">
+                    <div class="col-4 background-label-modal text-center">
+                        <label class="h6 text-uppercase text-modal-input">HORAS
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input value="{{ tarifa.horas }}" name="f_ed_horas" type="number" min="0" max="23" placeholder="Ingrese el numero de horas" class="form-control border border-secondary">
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-row">
+                    <div class="col-4 background-label-modal text-center">
+                        <label class="h6 text-uppercase text-modal-input">DIAS
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+
+                            <input name="f_ed_dias" value="{{ tarifa.dias }}" type="number" min="0" placeholder="Ingrese el numero de dias" class="form-control border border-secondary">
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row margin-row">
+                    <div class="col-4 background-label-modal text-center">
+                        <label class="h6 text-uppercase text-modal-input">PRECIO
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+
+                            <input name="f_precio_registro" value="{{ tarifa.precio }}" type="number" min="0" placeholder="Ingrese el precio" class="form-control border border-secondary">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text border border-secondary">Bs.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                <button onclick="editarTarifaRegistro('{% url 'editar_tarifa_registro' %}')" class="btn btn-primary">GUARDAR CAMBIOS</button>
+            </div>
+
+        </form>
+    </div>
+    <script src="{% static 'scripts/scriptGestionDeTarifas.js' %}">
+    </script>
+</div>
+

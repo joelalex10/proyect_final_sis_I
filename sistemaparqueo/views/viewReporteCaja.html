@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Caja</title>
+
+
+    <link rel="stylesheet" href="{% static 'styles/styleReporteCaja.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+</head>
+<body>
+
+    <div class="modal-dialog-scrollable">
+        <div class="col-sm-24 seccionPrincipal">
+            <div class="modal-content" >
+
+                <div class="barra-principal">
+                    <div class="container">
+
+                            <div class="row">
+                            <div class="col text-left">
+                                <h1 class="text-reporte-caja">REPORTE DE CAJA</h1>
+                            </div>
+                            <div class="col text-right">
+                                <div class="p text-usuario">
+                                    <label class="p font-weight-bold">Usuario:</label>
+                                    <label class="p">{{ usuario.nombre}}</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="contenido-principal">
+
+                    <div class="container">
+                        <form id="buscar_filtros">
+                             <div class="row">
+
+                                 <div class="col-5">
+                                     <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search margin-icon"></i>
+                                                    Buscar por mes</span>
+                                        </div>
+                                         <input type="month" name="buscar-mes" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                     </div>
+                                 </div>
+                                 <div class="col">
+                                     <button onclick="buscarPorFiltros('{% url 'filtrar_reporte_caja' %}')" class="btn btn-primary " id="botonBuscar"><i class="fas fa-sign-in-alt margin-icon"></i>BUSCAR</button>
+                                 </div>
+                             </div>
+                        </form>
+                    </div>
+
+
+                        <div class="row">
+                            <div class="col">
+                                <br>
+                                <table id="productoTable" class="table table-fixed table-sm border border-dark text-center">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th style="width: 150px" scope="col">DIA</th>
+                                        <th style="width: 275px" scope="col">USUARIO</th>
+                                        <th style="width: 225px" scope="col">MONTO APERTURA</th>
+                                        <th style="width: 225px" scope="col">MONTO FACTURADO</th>
+                                        <th style="width: 225px" scope="col">MONTO CLAUSURA</th>
+                                        <th style="width: 100px" scope="col">DIFERENCIAS</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for lista in listado_caja %}
+                                    <tr>
+                                        <td style="width: 150px"  >{{ lista.fecha }}</td>
+                                        <td style="width: 275px" >{{ lista.nombre }}</td>
+                                        <td style="width: 225px" >{{ lista.monto_apertura }} Bs.</td>
+                                        <td style="width: 225px" >{{ lista.monto_facturado }} Bs.</td>
+
+                                        <td style="width: 225px">{{ lista.monto_clausura }} Bs.</td>
+                                        {% if lista.diferencias > 0 %}
+
+                                            <td style="width: 100px; color: red">
+                                            {{ lista.diferencias }} Bs.
+                                            </td>
+                                        {% else %}
+                                            <td style="width: 100px; color: green">
+                                            {{ lista.diferencias }} Bs.
+                                            </td>
+
+                                        {% endif %}
+
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6 ">
+                                <br>
+                                <table id="cajaTotal" class="table table-total table-sm table-border border border-dark text-center">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th style="width: 200px" scope="col">TOTAL APERTURA</th>
+                                        <th style="width: 200px" scope="col">TOTAL FACTURADO</th>
+                                        <th style="width: 200px" scope="col">TOTAL REPORTADO</th>
+                                        <th style="width: 150px" scope="col">DIFERENCIA</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for suma in suma_caja %}
+                                        <tr>
+                                            <td style="width: 200px"  >{{ suma.monto_apertura }} Bs.</td>
+                                            <td style="width: 200px" >{{ suma.monto_facturado }} Bs.</td>
+                                            <td style="width: 200px" >{{ suma.monto_clausura }} Bs.</td>
+                                            {% if lista.diferencias > 0 %}
+                                                <td style="width: 150px; color: green">
+                                                    {{ suma.diferencias }} Bs.
+                                                </td>
+                                            {% else %}
+                                                <td style="width: 150px; color: red">
+                                                    {{ suma.diferencias }} Bs.
+                                                </td>
+
+                                            {% endif %}
+                                            </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <div class="col-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col text-right">
+                                <a href="{% url 'menuAdmin' usuario.id_usuario %}">
+                                    <button type="button" class="btn btn-primary" id="botonAtras"><i class="fas fa-sign-in-alt"></i>  ATRAS </button>
+                                </a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="{% static 'scripts/scriptReporteCaja.js' %}">
+    </script>
+</body>
+</html>

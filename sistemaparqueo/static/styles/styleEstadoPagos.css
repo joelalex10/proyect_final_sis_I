@@ -1,0 +1,105 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 225px;
+    margin-right: 225px;
+    margin-bottom: 5%;
+
+}
+
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+
+}
+
+#botonCerrarSesion{
+    margin-top: -2%;
+    background: darkred;
+    border-color: white;
+
+}
+#botonCerrarSesion:hover{
+    background: cadetblue;
+}
+
+.contenido-principal{
+    margin-bottom: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
+
+}
+.text-estado-pagos{
+    color: white;
+    margin-top: 20px;
+}
+.text-usuario{
+    color: white;
+}
+
+.text-monto{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-fixed tbody{
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td,
+.table-fixed th{
+    display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead >tr > th{
+    float: left;
+    border-bottom-width: 0;
+}
+.table-container{
+    border: black;
+    text-align: center;
+}
+.table-title{
+    background: #1a2537;
+}
+
+#botonRegistrarPago{
+    margin-top: 20px;
+    margin-left: 10px;
+    background: #1a2537;
+}
+#botonRegistrarPago:hover{
+    background: cadetblue;
+}
+
+#botonAtras{
+    margin-top: 20px;
+    background: darkred;
+}
+#botonAtras:hover{
+    background: cadetblue;
+}
+.columna-pago{
+    margin-top: 40px;
+}

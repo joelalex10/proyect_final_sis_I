@@ -1,0 +1,126 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Alquileres</title>
+
+    <link rel="stylesheet" href="{% static 'styles/styleReporteDeAlquileres.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+
+</head>
+<body>
+
+    <div class="modal-dialog-scrollable">
+        <div class="col-sm-24 seccionPrincipal">
+            <div class="modal-content" >
+
+                <div class="barra-principal">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-8 text-left">
+                                <h1 class="text-reporte-alquileres">REPORTE DE ALQUILERES</h1>
+                            </div>
+                            <div class="col-4 text-right">
+                                <div class="p text-usuario">
+                                    <label class="p font-weight-bold">Usuario:</label>
+                                    <label class="p">{{ usuario.nombre }}</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido-principal">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <div class="input-group-prepend ">
+                                        <span class="input-group-text ">
+                                            <i class="fas fa-search margin-icon"></i>
+                                            Buscar por cliente</span>
+                                    </div>
+                                    <input id="search-ci" type="text" class="form-control" placeholder="Buscar por ci de cliente" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+
+                            </div>
+
+                            <div class="col-2">
+                                <button type="button" onclick="buscarAlquilerPorFiltros('{% url 'buscar_alquiler_por_filtro' %}')" class="btn btn-primary" id="botonBuscar"><i class="fas fa-search"></i> BUSCAR </button>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <br>
+                                <table id="tablaAlquileres" class="table table-fixed table-sm border border-dark text-center">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th style="width: 100px" scope="col">CI</th>
+                                        <th style="width: 300px" scope="col">CLIENTE</th>
+                                        <th style="width: 200px" scope="col">MATRICULA VEHICULO</th>
+                                        <th style="width: 200px" scope="col">ESTADO ALQUILER</th>
+
+                                        <th style="width: 150px" scope="col">OPCIONES</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in lista_alquileres %}
+                                        <tr>
+                                            <td style="width: 100px" >{{ item.ci }}</td>
+                                            <td style="width: 300px">{{ item.nombre }}</td>
+                                            <td style="width: 200px">{{ item.placa }}</td>
+
+                                            <td style="width: 200px">{{ item.estado }}</td>
+                                            <td style="width: 150px">
+                                                <button onclick="abrirModalEstadoPagos('{% url 'mostrar_estado_pagos' item.id %}')" class="btn botonSeleccionar"><i class="fas fa-sign-in-alt margin-boton-seleccionar"></i>VER PAGOS</button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col text-right">
+                                <a href="{% url 'menuAdmin' usuario.id_usuario %}">
+                                    <button type="button" class="btn btn-primary" id="botonAtras"><i class="fas fa-sign-in-alt"></i>  ATRAS </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalestadoPagosAlquiler" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">var rutaModal='/menuPrincipal/reporteAlquileres/';</script>
+
+    <script src="{% static 'scripts/scriptReporteDeAlquileres.js' %}">
+
+    </script>
+
+
+
+</body>
+</html>

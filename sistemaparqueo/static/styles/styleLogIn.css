@@ -1,0 +1,67 @@
+body{
+    background: url("../assets/imagenParqueo.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+
+}
+
+.barra-principal{
+    background: darkslategrey;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seccionPrincipal{
+
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 5%;
+
+}
+
+.modal-content{
+    background-color: white;
+    padding: 0;
+    box-shadow: 0px 0px 2px darkslategrey;
+    alignment: center;
+
+}
+
+#botonCerrarSesion{
+    margin-top: -2%;
+    background: darkred;
+    border-color: white;
+
+}
+#botonCerrarSesion:hover{
+    background: cadetblue;
+}
+
+.contenido-principal{
+    margin-bottom: 20px;
+
+}
+.text-log-in{
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.select-usuario{
+    margin-top: 15px;
+}
+.input-log-in{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+#botonIngresar{
+    color: white;
+    background: #1a2537;
+}
+.icon-input{
+    background-color: #0b2e13;
+}
