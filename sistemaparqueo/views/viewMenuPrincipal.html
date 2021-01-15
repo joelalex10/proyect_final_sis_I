@@ -21,7 +21,7 @@
                     <p class="text-right texto-usuario">Usuario: {{ usuario.nombre }}</p>
                 </div>
 
-                <button class="btn btn-primary" id="boton-cerrar-sesion"><i class="fas fa-sign-in-alt"></i>Cerrar Sesion</button>
+                <button onclick="cerrarCesion('{% url 'index' %}')" class="btn btn-primary" id="boton-cerrar-sesion"><i class="fas fa-sign-in-alt"></i>Cerrar Sesion</button>
             </div>
             <div class="contenido-principal">
                 <div class="container">
@@ -121,6 +121,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-
+<script src="{% static 'scripts/scriptMenuPrincipal.js' %}"></script>
 </body>
 </html>

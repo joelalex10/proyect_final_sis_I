@@ -40,7 +40,7 @@ function mostrarEnTablaTotal(data){
                     
                     <td style="width: 200px" >${data[item].monto_clausura} Bs.</td>
                     <td style="width: 150px; color: green">
-                        ${data[item].diferencias} Bs.
+                        ${data[item].diferencias.toFixed(1)} Bs.
                     </td>    
                 </tr>
                 `)
@@ -52,7 +52,7 @@ function mostrarEnTablaTotal(data){
                     
                     <td style="width: 200px" >${data[item].monto_clausura} Bs.</td>
                     <td style="width: 150px; color: red">
-                        ${data[item].diferencias} Bs.
+                        ${data[item].diferencias.toFixed(1)} Bs.
                     </td>    
                 </tr>
                 `)
@@ -74,7 +74,7 @@ function mostrarEnTabla(data){
                 <td style="width: 225px" >${data[item].monto_facturado} Bs.</td>
                 <td style="width: 225px">${data[item].monto_clausura} Bs.</td>
                     <td style="width: 100px; color: green">
-                    ${data[item].diferencias} Bs.
+                    ${data[item].diferencias.toFixed(1)} Bs.
                     </td>
             </tr>
             `)
@@ -88,7 +88,7 @@ function mostrarEnTabla(data){
                 <td style="width: 225px" >${data[item].monto_facturado} Bs.</td>
                 <td style="width: 225px">${data[item].monto_clausura} Bs.</td>
                     <td style="width: 100px; color: red">
-                    ${data[item].diferencias} Bs.
+                    ${data[item].diferencias.toFixed(1)} Bs.
                     </td>
             </tr>
             `)

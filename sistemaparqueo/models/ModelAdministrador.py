@@ -11,10 +11,12 @@ class ModelAdministrador(ModelUsuario):
         cursor = connection.cursor()
         cursor.execute('''
         select a.fecha, b.nombre, a.monto_apertura, a.monto_facturado,
-        a.monto_clausura, ((a.monto_apertura  + a.monto_facturado ) - a.monto_clausura) as diferencias
+        a.monto_clausura, ((a.monto_apertura  + a.monto_facturado ) - a.monto_clausura) as diferencias,
+        TIMESTAMPDIFF(DAY, a.fecha, now()) AS dias_transcurridos
         from registro_caja a, usuario b
         where a.id_usuario=b.id_usuario
         and a.estado='CERRADO'
+        and TIMESTAMPDIFF(DAY, a.fecha, now()) <60
         order by a.fecha desc
             ''')
         results = dictfetchall(cursor)

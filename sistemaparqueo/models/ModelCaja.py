@@ -46,7 +46,7 @@ class ModelCaja():
     def registrarAperturaCaja(self,usuario):
         RegistroCaja.objects.create(
             hora_apertura = self.get_hora_entrada(),
-            monto_apertura = self.get_monto_apertura(),
+            monto_apertura = round(float(self.get_monto_apertura()),1),
             estado = self.get_estado(),
             id_usuario = Usuario.objects.get(
                 id_usuario=usuario
@@ -60,7 +60,7 @@ class ModelCaja():
         )
         caja.estado=self.get_estado()
         caja.hora_clausura=self.get_hora_cierre()
-        caja.monto_clausura=self.get_monto_cierre()
+        caja.monto_clausura=round(self.get_monto_cierre(),1)
         caja.save()
 
 

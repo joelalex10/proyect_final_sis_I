@@ -89,13 +89,15 @@ class ModelRegistroParqueo():
         cursor = connection.cursor()
         cursor.execute('''
         select a.id_parqueo as id, e.sector as sector, d.posicion as posicion,
-        b.placa as placa, a.entrada as entrada, a.salida as salida
+        b.placa as placa, a.entrada as entrada,
+         a.salida as salida, TIMESTAMPDIFF(DAY, a.salida, now()) AS dias_transcurridos 
         from registro_parqueo a, vehiculo b, tipo_vehiculo c, espacio d, sector e
         where a.vehiculo_id=b.id_vehiculo
         and b.tipo_vehiculo_id=c.id_tipo_vehiculo
         and d.id_espacio=a.id_espacio
         and d.id_sector=e.id_sector
         and a.salida is not null
+        and TIMESTAMPDIFF(DAY, a.salida, now()) <=60
         order by (a.salida) desc
         ''')
         total = dictfetchall(cursor)

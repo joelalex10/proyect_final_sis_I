@@ -29,7 +29,7 @@
                                     <label class="p font-weight-bold">Usuario:</label>
                                     <label class="p">{{ usuario.nombre}}</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                                <button onclick="cerrarCesion('{% url 'index' %}')"  class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
                             </div>
                         </div>
 
@@ -78,7 +78,7 @@
                                     <tbody>
                                     {% for lista in listado_caja %}
                                     <tr>
-                                        <td style="width: 150px"  >{{ lista.fecha }}</td>
+                                        <td style="width: 150px"  >{{ lista.fecha|date:"Y-m-d"}}</td>
                                         <td style="width: 275px" >{{ lista.nombre }}</td>
                                         <td style="width: 225px" >{{ lista.monto_apertura }} Bs.</td>
                                         <td style="width: 225px" >{{ lista.monto_facturado }} Bs.</td>
@@ -87,11 +87,11 @@
                                         {% if lista.diferencias > 0 %}
 
                                             <td style="width: 100px; color: red">
-                                            {{ lista.diferencias }} Bs.
+                                            {{ lista.diferencias|floatformat }} Bs.
                                             </td>
                                         {% else %}
                                             <td style="width: 100px; color: green">
-                                            {{ lista.diferencias }} Bs.
+                                            {{ lista.diferencias|floatformat }} Bs.
                                             </td>
 
                                         {% endif %}
@@ -126,11 +126,11 @@
                                             <td style="width: 200px" >{{ suma.monto_clausura }} Bs.</td>
                                             {% if lista.diferencias > 0 %}
                                                 <td style="width: 150px; color: green">
-                                                    {{ suma.diferencias }} Bs.
+                                                    {{ suma.diferencias|floatformat  }} Bs.
                                                 </td>
                                             {% else %}
                                                 <td style="width: 150px; color: red">
-                                                    {{ suma.diferencias }} Bs.
+                                                    {{ suma.diferencias|floatformat  }} Bs.
                                                 </td>
 
                                             {% endif %}
@@ -161,6 +161,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script src="{% static 'scripts/scriptReporteCaja.js' %}">
+    </script>
+    <script src="{% static 'scripts/scriptMenuPrincipal.js' %}">
     </script>
 </body>
 </html>

@@ -8,7 +8,6 @@ class ModelEmpleado(ModelUsuario):
         self.__hora_ingreso=None
         self.__hora_salida=None
         self.__ci = None
-        pass
 
     def set_hora_ingreso(self,hora_ingreso):
         self.__hora_ingreso=hora_ingreso
@@ -55,10 +54,13 @@ class ModelEmpleado(ModelUsuario):
     def listarEntradaDeEmpleados(self):
         cursor = connection.cursor()
         cursor.execute('''
-        select a.fecha, a.ingreso, a.salida, b.nombre, b.hora_ingreso, b.hora_salida
+        select a.fecha, a.ingreso, a.salida, b.nombre, 
+        b.hora_ingreso, b.hora_salida, TIMESTAMPDIFF(DAY, a.fecha, now()) AS dias_transcurridos
         from control_horario a, usuario b
         where a.usuario_id_usuario=b.id_usuario
         and a.salida is not null
+        and TIMESTAMPDIFF(DAY, a.fecha, now()) <=60
+        order by a.fecha desc
          ''')
         total = dictfetchall(cursor)
         return total

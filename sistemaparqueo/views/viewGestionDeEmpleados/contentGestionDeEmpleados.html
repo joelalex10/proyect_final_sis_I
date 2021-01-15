@@ -29,7 +29,7 @@
                                     <label class="p font-weight-bold">Usuario: </label>
                                     <label class="p">{{ usuario.nombre}}</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                                <button onclick="cerrarCesion('{% url 'index' %}')" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
                             </div>
                         </div>
                     </div>
@@ -223,6 +223,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script src="{% static 'scripts/scriptGestionDeEmpleados.js' %}">
+    </script>
+
+    <script src="{% static 'scripts/scriptMenuPrincipal.js' %}">
     </script>
 </body>
 </html>

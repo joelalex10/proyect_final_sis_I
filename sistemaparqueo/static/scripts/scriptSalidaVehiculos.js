@@ -91,7 +91,7 @@ function registrarSalida(ruta, idRegistro, fecha_salida, id_tarifa, idEspacio, m
     console.log("EL ID REGISTRO ES: "+idEspacio)
     console.log("EL MONTO ES: "+monto)
 
-    var opcion = confirm("SE IMPRIMIRA EL TICKET DE SALIDA ESTA SEGURO DE REGISTRAR LA SALIDA")
+    var opcion = confirm("SE GENERARA EL TICKET DE SALIDA ESTA SEGURO DE REGISTRAR LA SALIDA")
     if(opcion){
         $.ajax({
             url: ruta,

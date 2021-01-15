@@ -26,6 +26,7 @@ from sistemaparqueo.controllers import controllerLogIn, controllerMenuAdministra
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',controllerLogIn.MostrarInicio.as_view(), name='index'),
+    path('inicioSesion/validarUsuario/',controllerLogIn.ValidarUsuario.as_view(), name='validarLogIn'),
     path('<int:pk>/menuPrincipal/',controllerLogIn.MostrarMenuAdmin.as_view(), name='menuAdmin'),
     path('<int:pk>/menuEmpleado/', controllerLogIn.MostrarMenuEmpleado.as_view(), name='menuEmpleado'),
 

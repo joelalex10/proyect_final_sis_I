@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-8">
                         <div class="input-group">
-                            <input name="forms_hora_ingreso" value="{{ usuario.obtener_hora_ingreso }}" type="time" class="form-control border border-secondary">
+                            <input name="forms_hora_ingreso" value="{{ usuario.obtener_hora_ingreso|date:"H:i" }}" type="time" class="form-control border border-secondary">
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-8">
                         <div class="input-group">
-                            <input name="forms_hora_salida" value="{{ usuario.obtener_hora_salida }}" type="time" class="form-control border border-secondary">
+                            <input name="forms_hora_salida" value="{{ usuario.obtener_hora_salida|date:"H:i" }}" type="time" class="form-control border border-secondary">
                         </div>
                     </div>
                 </div>

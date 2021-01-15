@@ -51,7 +51,7 @@ class ModelAlquiler():
         )
         plan_pagos =PlanPagos.objects.create(
             num_cuotas = self.get_cuotas(),
-            monto_cuota = tarifa.precio / self.get_cuotas(),
+            monto_cuota = round(tarifa.precio / self.get_cuotas()),
             alquiler_id_alquiler = Alquiler.objects.get(
                 id_alquiler = new_alquiler.id_alquiler
             )
@@ -102,7 +102,7 @@ class ModelAlquiler():
         cursor = connection.cursor()
         cursor.execute('''
         SELECT c.id_alquiler as id, a.ci as ci,
-         a.nombre as nombre, b.placa as placa, c.estado as estado
+        a.nombre as nombre, b.placa as placa, c.estado as estado
         from cliente a, vehiculo b, alquiler c
         where a.id_cliente=b.cliente_id
         and a.id_cliente=c.cliente_id_cliente

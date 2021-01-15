@@ -1,9 +1,31 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.db import connection
 
 from django.views.generic import TemplateView,ListView
+from django.views import View
 
 from sistemaparqueo.models.ModelUsuario import ModelUsuario
+
+class ValidarUsuario(View):
+    def get(self,request):
+        f_nombre_usuario = request.GET.get('user_name')
+        f_contrasena = request.GET.get('password')
+        f_tipo_usuario = request.GET.get('user_type')
+        usuario = ModelUsuario()
+        usuario.set_nombre_usuario(f_nombre_usuario)
+        usuario.set_password(f_contrasena)
+        usuario.set_tipo_usuario(f_tipo_usuario)
+
+        respuesta = usuario.consultarUsuario()
+        print("LA RESPUESTA ES")
+        print(respuesta)
+        if(respuesta):
+            data = {"id_usuario": respuesta.id_usuario}
+        else:
+            data = {}
+
+        return JsonResponse(data)
 
 
 class MostrarInicio(TemplateView):
@@ -15,7 +37,7 @@ class MostrarInicio(TemplateView):
         tipo_usuarios = usuario.mostrarListaTipoUsuario()
         context["tipo_usuarios"]=tipo_usuarios
         return context
-
+    '''
     def post(self, request):
         f_nombre_usuario = request.POST.get('user_name')
         f_contrasena = request.POST.get('password')
@@ -34,10 +56,9 @@ class MostrarInicio(TemplateView):
             return redirect('menuEmpleado',int(respuesta.id_usuario))
 
         return redirect('index')
-
+    '''
 class MostrarMenuAdmin(TemplateView):
     template_name = 'viewMenuPrincipal.html'
-
 
     def get_context_data(self, **kwargs):
         context = super(MostrarMenuAdmin, self).get_context_data(**kwargs)

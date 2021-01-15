@@ -29,7 +29,7 @@
                                     <label class="p font-weight-bold">Usuario:</label>
                                     <label class="p">{{ usuario.nombre }}</label>
                                 </div>
-                                <button type="button" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                                <button onclick="cerrarCesion('{% url 'index' %}')" type="button" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
                             </div>
                         </div>
                     </div>
@@ -151,6 +151,9 @@
 
     <script src="{% static 'scripts/scriptHistorialUbicacion.js' %}">
 
+    </script>
+
+    <script src="{% static 'scripts/scriptMenuPrincipal.js' %}">
     </script>
 </body>
 </html>

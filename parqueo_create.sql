@@ -1,275 +1,368 @@
--- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2020-12-31 16:21:06.1
-
--- tables
--- Table: alquiler
-CREATE TABLE alquiler (
-    id_alquiler int NOT NULL AUTO_INCREMENT,
-    inicio date NOT NULL,
-    fin date NOT NULL,
-    estado varchar(20) NOT NULL,
-    cliente_id_cliente int NOT NULL,
-    id_tarifa_alquiler int NOT NULL,
-    CONSTRAINT alquiler_pk PRIMARY KEY (id_alquiler)
+create table auth_group
+(
+    id   int auto_increment
+        primary key,
+    name varchar(150) not null,
+    constraint name
+        unique (name)
 );
 
--- Table: cliente
-CREATE TABLE cliente (
-    id_cliente int NOT NULL AUTO_INCREMENT,
-    ci varchar(30) NOT NULL,
-    nombre varchar(45) NOT NULL,
-    CONSTRAINT cliente_pk PRIMARY KEY (id_cliente)
+create table auth_user
+(
+    id           int auto_increment
+        primary key,
+    password     varchar(128) not null,
+    last_login   datetime(6)  null,
+    is_superuser tinyint(1)   not null,
+    username     varchar(150) not null,
+    first_name   varchar(150) not null,
+    last_name    varchar(150) not null,
+    email        varchar(254) not null,
+    is_staff     tinyint(1)   not null,
+    is_active    tinyint(1)   not null,
+    date_joined  datetime(6)  not null,
+    constraint username
+        unique (username)
 );
 
--- Table: control_horario
-CREATE TABLE control_horario (
-    id_control_horario int NOT NULL AUTO_INCREMENT,
-    fecha date NOT NULL,
-    ingreso time NOT NULL,
-    salida time NOT NULL,
-    usuario_id_usuario int NOT NULL,
-    CONSTRAINT control_horario_pk PRIMARY KEY (id_control_horario)
+create table auth_user_groups
+(
+    id       int auto_increment
+        primary key,
+    user_id  int not null,
+    group_id int not null,
+    constraint auth_user_groups_user_id_group_id_94350c0c_uniq
+        unique (user_id, group_id),
+    constraint auth_user_groups_group_id_97559544_fk_auth_group_id
+        foreign key (group_id) references auth_group (id),
+    constraint auth_user_groups_user_id_6a12ed8b_fk_auth_user_id
+        foreign key (user_id) references auth_user (id)
 );
 
--- Table: descuento
-CREATE TABLE descuento (
-    id_descuento int NOT NULL AUTO_INCREMENT,
-    descripcion text NOT NULL,
-    monto double NOT NULL,
-    id_registro_parqueo int NOT NULL,
-    CONSTRAINT descuento_pk PRIMARY KEY (id_descuento)
+create table cliente
+(
+    id_cliente int auto_increment
+        primary key,
+    ci         varchar(30) not null,
+    nombre     varchar(45) not null
 );
 
--- Table: empresa
-CREATE TABLE empresa (
-    id_empresa int NOT NULL AUTO_INCREMENT,
-    nit varchar(45) NOT NULL,
-    nombre varchar(30) NOT NULL,
-    razon_social varchar(40) NOT NULL,
-    direccion text NOT NULL,
-    contacto varchar(45) NOT NULL,
-    CONSTRAINT empresa_pk PRIMARY KEY (id_empresa)
+create table django_content_type
+(
+    id        int auto_increment
+        primary key,
+    app_label varchar(100) not null,
+    model     varchar(100) not null,
+    constraint django_content_type_app_label_model_76bd3d3b_uniq
+        unique (app_label, model)
 );
 
--- Table: espacio
-CREATE TABLE espacio (
-    id_espacio int NOT NULL AUTO_INCREMENT,
-    posicion varchar(20) NOT NULL,
-    estado varchar(30) NOT NULL,
-    id_sector int NOT NULL,
-    tipo_espacio_id_tipo_espacio int NOT NULL,
-    CONSTRAINT espacio_pk PRIMARY KEY (id_espacio)
+create table auth_permission
+(
+    id              int auto_increment
+        primary key,
+    name            varchar(255) not null,
+    content_type_id int          not null,
+    codename        varchar(100) not null,
+    constraint auth_permission_content_type_id_codename_01ab375a_uniq
+        unique (content_type_id, codename),
+    constraint auth_permission_content_type_id_2f476e4b_fk_django_co
+        foreign key (content_type_id) references django_content_type (id)
 );
 
--- Table: factura
-CREATE TABLE factura (
-    id_factura int NOT NULL AUTO_INCREMENT,
-    codigo_control varchar(30) NOT NULL,
-    autorizacion int NOT NULL,
-    empresa_id_empresa int NOT NULL,
-    alquiler_id_alquiler int NOT NULL,
-    registro_parqueo_id_parqueo int NOT NULL,
-    CONSTRAINT factura_pk PRIMARY KEY (id_factura)
+create table auth_group_permissions
+(
+    id            int auto_increment
+        primary key,
+    group_id      int not null,
+    permission_id int not null,
+    constraint auth_group_permissions_group_id_permission_id_0cd325b0_uniq
+        unique (group_id, permission_id),
+    constraint auth_group_permissio_permission_id_84c5c92e_fk_auth_perm
+        foreign key (permission_id) references auth_permission (id),
+    constraint auth_group_permissions_group_id_b120cbf9_fk_auth_group_id
+        foreign key (group_id) references auth_group (id)
 );
 
--- Table: incidentes
-CREATE TABLE incidentes (
-    id_incidentes int NOT NULL AUTO_INCREMENT,
-    descripcion text NOT NULL,
-    id_registro_parqueo int NOT NULL,
-    CONSTRAINT incidentes_pk PRIMARY KEY (id_incidentes)
+create table auth_user_user_permissions
+(
+    id            int auto_increment
+        primary key,
+    user_id       int not null,
+    permission_id int not null,
+    constraint auth_user_user_permissions_user_id_permission_id_14a6b632_uniq
+        unique (user_id, permission_id),
+    constraint auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm
+        foreign key (permission_id) references auth_permission (id),
+    constraint auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id
+        foreign key (user_id) references auth_user (id)
 );
 
--- Table: pagos_alquileres
-CREATE TABLE pagos_alquileres (
-    id_pago_cuotas int NOT NULL,
-    nro_cuota int NOT NULL,
-    estado_cuota int NOT NULL,
-    fecha datetime NOT NULL,
-    plan_pagos_id_plan_de_pagos int NOT NULL,
-    CONSTRAINT pagos_alquileres_pk PRIMARY KEY (id_pago_cuotas)
+create table django_admin_log
+(
+    id              int auto_increment
+        primary key,
+    action_time     datetime(6)       not null,
+    object_id       longtext          null,
+    object_repr     varchar(200)      not null,
+    action_flag     smallint unsigned not null,
+    change_message  longtext          not null,
+    content_type_id int               null,
+    user_id         int               not null,
+    constraint django_admin_log_content_type_id_c4bce8eb_fk_django_co
+        foreign key (content_type_id) references django_content_type (id),
+    constraint django_admin_log_user_id_c564eba6_fk_auth_user_id
+        foreign key (user_id) references auth_user (id),
+    constraint action_flag
+        check (`action_flag` >= 0)
 );
 
--- Table: plan_pagos
-CREATE TABLE plan_pagos (
-    id_plan_de_pagos int NOT NULL AUTO_INCREMENT,
-    monto_cuota double NOT NULL,
-    num_cuotas int NOT NULL,
-    alquiler_id_alquiler int NOT NULL,
-    CONSTRAINT plan_pagos_pk PRIMARY KEY (id_plan_de_pagos)
+create table django_migrations
+(
+    id      int auto_increment
+        primary key,
+    app     varchar(255) not null,
+    name    varchar(255) not null,
+    applied datetime(6)  not null
 );
 
--- Table: registro_caja
-CREATE TABLE registro_caja (
-    id_registro_caja int NOT NULL AUTO_INCREMENT,
-    fecha datetime NOT NULL,
-    monto double NOT NULL,
-    tipo varchar(40) NOT NULL,
-    id_usuario int NOT NULL,
-    CONSTRAINT registro_caja_pk PRIMARY KEY (id_registro_caja)
+create table django_session
+(
+    session_key  varchar(40) not null
+        primary key,
+    session_data longtext    not null,
+    expire_date  datetime(6) not null
 );
 
--- Table: registro_parqueo
-CREATE TABLE registro_parqueo (
-    id_parqueo int NOT NULL AUTO_INCREMENT,
-    entrada datetime NOT NULL,
-    salida datetime NOT NULL,
-    id_usuario int NOT NULL,
-    vehiculo_id int NOT NULL,
-    id_espacio int NOT NULL,
-    id_tarifas int NULL,
-    CONSTRAINT registro_parqueo_pk PRIMARY KEY (id_parqueo)
+create index django_session_expire_date_a5c62663
+    on django_session (expire_date);
+
+create table empresa
+(
+    id_empresa   int auto_increment
+        primary key,
+    nit          varchar(45) not null,
+    nombre       varchar(30) not null,
+    autorizacion varchar(40) null,
+    razon_social varchar(40) not null,
+    direccion    text        not null,
+    contacto     varchar(45) not null
 );
 
--- Table: sector
-CREATE TABLE sector (
-    id_sector int NOT NULL,
-    sector varchar(10) NOT NULL,
-    CONSTRAINT sector_pk PRIMARY KEY (id_sector)
+create table sector
+(
+    id_sector int auto_increment
+        primary key,
+    sector    varchar(10) not null
 );
 
--- Table: tarifa
-CREATE TABLE tarifa (
-    id_tarifas int NOT NULL AUTO_INCREMENT,
-    horas int NOT NULL,
-    dias int NOT NULL,
-    precio decimal(4,2) NOT NULL,
-    CONSTRAINT tarifa_pk PRIMARY KEY (id_tarifas)
+create table tarifa
+(
+    id_tarifas int auto_increment
+        primary key,
+    horas      int          not null,
+    dias       int          not null,
+    precio     double(6, 2) not null
 );
 
--- Table: tarifa_alquiler
-CREATE TABLE tarifa_alquiler (
-    id_tarifa_alquiler int NOT NULL AUTO_INCREMENT,
-    meses int NOT NULL,
-    precio double NOT NULL,
-    CONSTRAINT tarifa_alquiler_pk PRIMARY KEY (id_tarifa_alquiler)
+create table tarifa_alquiler
+(
+    id_tarifa_alquiler int auto_increment
+        primary key,
+    meses              int          not null,
+    precio             double(6, 2) not null
 );
 
--- Table: tipo_espacio
-CREATE TABLE tipo_espacio (
-    id_tipo_espacio int NOT NULL AUTO_INCREMENT,
-    tipo varchar(20) NOT NULL,
-    CONSTRAINT tipo_espacio_pk PRIMARY KEY (id_tipo_espacio)
+create table tipo_espacio
+(
+    id_tipo_espacio int auto_increment
+        primary key,
+    tipo            varchar(20) not null
 );
 
--- Table: tipo_usuario
-CREATE TABLE tipo_usuario (
-    id_tipo_usuario int NOT NULL AUTO_INCREMENT,
-    tipo varchar(45) NOT NULL,
-    CONSTRAINT tipo_usuario_pk PRIMARY KEY (id_tipo_usuario)
+create table espacio
+(
+    id_espacio                   int auto_increment
+        primary key,
+    posicion                     varchar(20) not null,
+    estado                       varchar(30) not null,
+    id_sector                    int         not null,
+    tipo_espacio_id_tipo_espacio int         not null,
+    constraint espacio_sector
+        foreign key (id_sector) references sector (id_sector),
+    constraint espacio_tipo_espacio
+        foreign key (tipo_espacio_id_tipo_espacio) references tipo_espacio (id_tipo_espacio)
 );
 
--- Table: tipo_vehiculo
-CREATE TABLE tipo_vehiculo (
-    id_tipo_vehiculo int NOT NULL AUTO_INCREMENT,
-    tipo varchar(45) NOT NULL,
-    CONSTRAINT tipo_vehiculo_pk PRIMARY KEY (id_tipo_vehiculo)
+create table tipo_usuario
+(
+    id_tipo_usuario int auto_increment
+        primary key,
+    tipo            varchar(45) not null
 );
 
--- Table: usuario
-CREATE TABLE usuario (
-    id_usuario int NOT NULL AUTO_INCREMENT,
-    ci varchar(30) NOT NULL,
-    nombre varchar(45) NOT NULL,
-    usuario varchar(30) NOT NULL,
-    password varchar(30) NOT NULL,
-    hora_ingreso time NULL,
-    hora_salida time NULL,
-    id_tipo_usuario int NOT NULL,
-    CONSTRAINT usuario_pk PRIMARY KEY (id_usuario)
+create table tipo_vehiculo
+(
+    id_tipo_vehiculo int auto_increment
+        primary key,
+    tipo             varchar(45) not null
 );
 
--- Table: vehiculo
-CREATE TABLE vehiculo (
-    id_vehiculo int NOT NULL AUTO_INCREMENT,
-    placa varchar(30) NOT NULL,
-    marca_modelo varchar(45) NULL,
-    color varchar(15) NOT NULL,
-    cliente_id int NULL,
-    tipo_vehiculo_id int NOT NULL,
-    CONSTRAINT vehiculo_pk PRIMARY KEY (id_vehiculo)
+create table usuario
+(
+    id_usuario      int auto_increment
+        primary key,
+    ci              varchar(30) not null,
+    nombre          varchar(45) not null,
+    usuario         varchar(30) not null,
+    password        varchar(30) not null,
+    hora_ingreso    time        null,
+    hora_salida     time        null,
+    id_tipo_usuario int         not null,
+    constraint usuario_tipo_usuario
+        foreign key (id_tipo_usuario) references tipo_usuario (id_tipo_usuario)
 );
 
--- foreign keys
--- Reference: alquiler_cliente (table: alquiler)
-ALTER TABLE alquiler ADD CONSTRAINT alquiler_cliente FOREIGN KEY alquiler_cliente (cliente_id_cliente)
-    REFERENCES cliente (id_cliente);
+create table control_horario
+(
+    id_control_horario int auto_increment
+        primary key,
+    fecha              date not null,
+    ingreso            time not null,
+    salida             time null,
+    usuario_id_usuario int  not null,
+    constraint control_horario_usuario
+        foreign key (usuario_id_usuario) references usuario (id_usuario)
+);
 
--- Reference: alquiler_tarifa_alquiler (table: alquiler)
-ALTER TABLE alquiler ADD CONSTRAINT alquiler_tarifa_alquiler FOREIGN KEY alquiler_tarifa_alquiler (id_tarifa_alquiler)
-    REFERENCES tarifa_alquiler (id_tarifa_alquiler);
+create table registro_caja
+(
+    id_registro_caja int auto_increment
+        primary key,
+    hora_apertura    time        not null,
+    hora_clausura    time        null,
+    monto_apertura   double      not null,
+    monto_clausura   double      null,
+    estado           varchar(40) not null,
+    id_usuario       int         not null,
+    fecha            date        not null,
+    monto_facturado  double      null,
+    constraint registro_caja_usuario
+        foreign key (id_usuario) references usuario (id_usuario)
+);
 
--- Reference: control_horario_usuario (table: control_horario)
-ALTER TABLE control_horario ADD CONSTRAINT control_horario_usuario FOREIGN KEY control_horario_usuario (usuario_id_usuario)
-    REFERENCES usuario (id_usuario);
+create table vehiculo
+(
+    id_vehiculo      int auto_increment
+        primary key,
+    placa            varchar(30) not null,
+    marca_modelo     varchar(45) null,
+    color            varchar(15) not null,
+    cliente_id       int         null,
+    tipo_vehiculo_id int         not null,
+    constraint vehiculo_cliente
+        foreign key (cliente_id) references cliente (id_cliente),
+    constraint vehiculo_tipo_vehiculo
+        foreign key (tipo_vehiculo_id) references tipo_vehiculo (id_tipo_vehiculo)
+);
 
--- Reference: descuento_registro_parqueo (table: descuento)
-ALTER TABLE descuento ADD CONSTRAINT descuento_registro_parqueo FOREIGN KEY descuento_registro_parqueo (id_registro_parqueo)
-    REFERENCES registro_parqueo (id_parqueo);
+create table alquiler
+(
+    id_alquiler          int auto_increment
+        primary key,
+    inicio               date        not null,
+    fin                  date        not null,
+    estado               varchar(20) not null,
+    cliente_id_cliente   int         not null,
+    id_tarifa_alquiler   int         not null,
+    vehiculo_id_vehiculo int         not null,
+    constraint alquiler_cliente
+        foreign key (cliente_id_cliente) references cliente (id_cliente),
+    constraint alquiler_tarifa_alquiler
+        foreign key (id_tarifa_alquiler) references tarifa_alquiler (id_tarifa_alquiler),
+    constraint alquiler_vehiculo
+        foreign key (vehiculo_id_vehiculo) references vehiculo (id_vehiculo)
+);
 
--- Reference: espacio_sector (table: espacio)
-ALTER TABLE espacio ADD CONSTRAINT espacio_sector FOREIGN KEY espacio_sector (id_sector)
-    REFERENCES sector (id_sector);
+create table plan_pagos
+(
+    id_plan_de_pagos     int auto_increment
+        primary key,
+    monto_cuota          double not null,
+    num_cuotas           int    not null,
+    alquiler_id_alquiler int    not null,
+    constraint plan_pagos_alquiler
+        foreign key (alquiler_id_alquiler) references alquiler (id_alquiler)
+);
 
--- Reference: espacio_tipo_espacio (table: espacio)
-ALTER TABLE espacio ADD CONSTRAINT espacio_tipo_espacio FOREIGN KEY espacio_tipo_espacio (tipo_espacio_id_tipo_espacio)
-    REFERENCES tipo_espacio (id_tipo_espacio);
+create table pagos_alquileres
+(
+    id_pago_cuotas              int auto_increment
+        primary key,
+    nro_cuota                   int         not null,
+    estado_cuota                varchar(20) not null,
+    fecha                       datetime    not null,
+    plan_pagos_id_plan_de_pagos int         not null,
+    constraint pagos_alquileres_plan_pagos
+        foreign key (plan_pagos_id_plan_de_pagos) references plan_pagos (id_plan_de_pagos)
+);
 
--- Reference: factura_alquiler (table: factura)
-ALTER TABLE factura ADD CONSTRAINT factura_alquiler FOREIGN KEY factura_alquiler (alquiler_id_alquiler)
-    REFERENCES alquiler (id_alquiler);
+create table registro_parqueo
+(
+    id_parqueo  int auto_increment
+        primary key,
+    entrada     datetime not null,
+    salida      datetime null,
+    id_usuario  int      not null,
+    vehiculo_id int      not null,
+    id_espacio  int      not null,
+    id_tarifas  int      null,
+    constraint registro_parqueo_espacio
+        foreign key (id_espacio) references espacio (id_espacio),
+    constraint registro_parqueo_tarifa
+        foreign key (id_tarifas) references tarifa (id_tarifas),
+    constraint registro_parqueo_usuario
+        foreign key (id_usuario) references usuario (id_usuario),
+    constraint registro_parqueo_vehiculo
+        foreign key (vehiculo_id) references vehiculo (id_vehiculo)
+);
 
--- Reference: factura_empresa (table: factura)
-ALTER TABLE factura ADD CONSTRAINT factura_empresa FOREIGN KEY factura_empresa (empresa_id_empresa)
-    REFERENCES empresa (id_empresa);
+create table descuento
+(
+    id_descuento        int auto_increment
+        primary key,
+    descripcion         text   not null,
+    monto               double not null,
+    id_registro_parqueo int    not null,
+    constraint descuento_registro_parqueo
+        foreign key (id_registro_parqueo) references registro_parqueo (id_parqueo)
+);
 
--- Reference: factura_registro_parqueo (table: factura)
-ALTER TABLE factura ADD CONSTRAINT factura_registro_parqueo FOREIGN KEY factura_registro_parqueo (registro_parqueo_id_parqueo)
-    REFERENCES registro_parqueo (id_parqueo);
+create table factura
+(
+    id_factura                  int auto_increment
+        primary key,
+    codigo_control              varchar(30) null,
+    nro_factura                 varchar(45) null,
+    fecha                       datetime    not null,
+    empresa_id_empresa          int         not null,
+    alquiler_id_alquiler        int         null,
+    registro_parqueo_id_parqueo int         null,
+    constraint factura_alquiler
+        foreign key (alquiler_id_alquiler) references alquiler (id_alquiler),
+    constraint factura_empresa
+        foreign key (empresa_id_empresa) references empresa (id_empresa),
+    constraint factura_registro_parqueo
+        foreign key (registro_parqueo_id_parqueo) references registro_parqueo (id_parqueo)
+);
 
--- Reference: incidentes_registro_parqueo (table: incidentes)
-ALTER TABLE incidentes ADD CONSTRAINT incidentes_registro_parqueo FOREIGN KEY incidentes_registro_parqueo (id_registro_parqueo)
-    REFERENCES registro_parqueo (id_parqueo);
-
--- Reference: pagos_alquileres_plan_pagos (table: pagos_alquileres)
-ALTER TABLE pagos_alquileres ADD CONSTRAINT pagos_alquileres_plan_pagos FOREIGN KEY pagos_alquileres_plan_pagos (plan_pagos_id_plan_de_pagos)
-    REFERENCES plan_pagos (id_plan_de_pagos);
-
--- Reference: plan_pagos_alquiler (table: plan_pagos)
-ALTER TABLE plan_pagos ADD CONSTRAINT plan_pagos_alquiler FOREIGN KEY plan_pagos_alquiler (alquiler_id_alquiler)
-    REFERENCES alquiler (id_alquiler);
-
--- Reference: registro_caja_usuario (table: registro_caja)
-ALTER TABLE registro_caja ADD CONSTRAINT registro_caja_usuario FOREIGN KEY registro_caja_usuario (id_usuario)
-    REFERENCES usuario (id_usuario);
-
--- Reference: registro_parqueo_espacio (table: registro_parqueo)
-ALTER TABLE registro_parqueo ADD CONSTRAINT registro_parqueo_espacio FOREIGN KEY registro_parqueo_espacio (id_espacio)
-    REFERENCES espacio (id_espacio);
-
--- Reference: registro_parqueo_tarifa (table: registro_parqueo)
-ALTER TABLE registro_parqueo ADD CONSTRAINT registro_parqueo_tarifa FOREIGN KEY registro_parqueo_tarifa (id_tarifas)
-    REFERENCES tarifa (id_tarifas);
-
--- Reference: registro_parqueo_usuario (table: registro_parqueo)
-ALTER TABLE registro_parqueo ADD CONSTRAINT registro_parqueo_usuario FOREIGN KEY registro_parqueo_usuario (id_usuario)
-    REFERENCES usuario (id_usuario);
-
--- Reference: registro_parqueo_vehiculo (table: registro_parqueo)
-ALTER TABLE registro_parqueo ADD CONSTRAINT registro_parqueo_vehiculo FOREIGN KEY registro_parqueo_vehiculo (vehiculo_id)
-    REFERENCES vehiculo (id_vehiculo);
-
--- Reference: usuario_tipo_usuario (table: usuario)
-ALTER TABLE usuario ADD CONSTRAINT usuario_tipo_usuario FOREIGN KEY usuario_tipo_usuario (id_tipo_usuario)
-    REFERENCES tipo_usuario (id_tipo_usuario);
-
--- Reference: vehiculo_cliente (table: vehiculo)
-ALTER TABLE vehiculo ADD CONSTRAINT vehiculo_cliente FOREIGN KEY vehiculo_cliente (cliente_id)
-    REFERENCES cliente (id_cliente);
-
--- Reference: vehiculo_tipo_vehiculo (table: vehiculo)
-ALTER TABLE vehiculo ADD CONSTRAINT vehiculo_tipo_vehiculo FOREIGN KEY vehiculo_tipo_vehiculo (tipo_vehiculo_id)
-    REFERENCES tipo_vehiculo (id_tipo_vehiculo);
-
--- End of file.
+create table incidentes
+(
+    id_incidentes       int auto_increment
+        primary key,
+    descripcion         text not null,
+    id_registro_parqueo int  not null,
+    constraint incidentes_registro_parqueo
+        foreign key (id_registro_parqueo) references registro_parqueo (id_parqueo)
+);
 

@@ -47,14 +47,14 @@ class ModelUsuario:
 
     def consultarUsuario(self,):
         list_id_usuario=Usuario.objects.filter(usuario = self.__nombre_usuario,
-                                          password = self.__password,
-                                          id_tipo_usuario= TipoUsuario.objects.get(
-                                              id_tipo_usuario=self.__tipo_usuario
-                                          ))
+          password = self.__password,
+          id_tipo_usuario= TipoUsuario.objects.get(
+              id_tipo_usuario=self.__tipo_usuario
+          ))
         if(list_id_usuario.exists()):
             return list_id_usuario[0]
         else:
-            return 0
+            return False
 
     def buscarUsuarioPorId(self,usuarioId):
         return Usuario.objects.get(id_usuario=usuarioId)

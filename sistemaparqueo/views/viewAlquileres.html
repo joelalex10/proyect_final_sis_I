@@ -29,7 +29,7 @@
                                     <label class="p font-weight-bold">Usuario:</label>
                                     <label class="p">{{ usuario.nombre }}</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
+                                <button onclick="cerrarCesion('{% url 'verificar_cierre_caja' %}', '{% url 'index' %}')" class="btn btn-primary " id="botonCerrarSesion"><i class="fas fa-sign-in-alt"></i>CERRAR SESION</button>
                             </div>
                         </div>
                     </div>
@@ -115,6 +115,8 @@
         var ruta_estados='/menuEmpleado/controlAlquileres/'
     </script>
     <script src="{% static 'scripts/scriptAlquiler.js' %}"></script>
+
+    <script src="{% static 'scripts/scriptMenuEmpleado.js' %}"></script>
 
 </body>
 </html>

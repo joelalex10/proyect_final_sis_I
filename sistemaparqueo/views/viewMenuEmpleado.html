@@ -24,7 +24,7 @@
                     <p class="text-right texto-usuario">Usuario: {{ usuario.nombre}}</p>
                 </div>
 
-                <button class="btn btn-primary" id="boton-cerrar-sesion"><i class="fas fa-sign-in-alt"></i>Cerrar Sesion</button>
+                <button onclick="cerrarCesion('{% url 'verificar_cierre_caja' %}', '{% url 'index' %}')" class="btn btn-primary" id="boton-cerrar-sesion"><i class="fas fa-sign-in-alt"></i>Cerrar Sesion</button>
             </div>
             <div class="contenido-principal">
                 <div class="container">
